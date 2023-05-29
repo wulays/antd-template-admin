@@ -6,15 +6,21 @@ import Header from './header'
 import useSystemStore from '@/store/modules/system.ts'
 import TopBar from '@/layout/top-bar'
 import { Drawer } from 'antd'
-import { matchRoutes, Outlet, useLocation } from 'react-router-dom'
+import { matchRoutes, Outlet, useLocation, useNavigate } from 'react-router-dom'
 import routes from '@/router'
 import type { RouteItem } from '@/router'
 import logo from '@/assets/images/logo.png'
 
+import { useAnimate } from 'framer-motion'
+import { useEffect } from 'react'
+import useUserStore from '@/store/modules/user.ts'
+
 export default function Layout() {
     const systemStore = useSystemStore()
+    const userStore = useUserStore()
 
     const location = useLocation()
+    const navigate = useNavigate()
 
     // 需要权限的路由
     const authRoutes = routes.routes.find((_) => _.path === '/')?.children || []
@@ -27,6 +33,18 @@ export default function Layout() {
     const breadcrumbList = routeList.map((_) => {
         return { title: (_.route as RouteItem).meta?.name }
     })
+
+    const [scope, animate] = useAnimate()
+
+    useEffect(() => {
+        if (!route?.path) {
+            // 判断是否有设置主页有则显示没有则选用权限路由第一个
+            const path = userStore.homepath || authRoutes[0]?.path || '/login'
+            navigate(path === '/' ? '/home' : path)
+            return
+        }
+        animate('div', { opacity: [0, 1] })
+    }, [route])
 
     return (
         <div className={styles.warpper}>
@@ -58,7 +76,7 @@ export default function Layout() {
                 </div>
                 <div className={styles.main}>
                     <TopBar list={breadcrumbList} />
-                    <div className={styles.content}>
+                    <div ref={scope} className={styles.content}>
                         <Outlet />
                     </div>
                 </div>

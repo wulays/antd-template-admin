@@ -4,10 +4,12 @@ import logo from '@/assets/images/logo.png'
 import { Form, Input, Checkbox, Button } from 'antd'
 import { useNavigate } from 'react-router-dom'
 import useUserStore, { userLoginType } from '@/store/modules/user.ts'
+import { motion } from 'framer-motion'
 
 export default function Login() {
     const navigate = useNavigate()
     const userStore = useUserStore()
+
     async function handleLogin(params: userLoginType) {
         try {
             const data = await userStore.login(params)
@@ -21,7 +23,13 @@ export default function Login() {
     return (
         <div className={styles.container}>
             <img className={styles.bg} src={bg} alt="" />
-            <div className={styles.warp}>
+            <motion.div
+                animate={{
+                    scale: [0.7, 1],
+                    opacity: [0.1, 1]
+                }}
+                className={styles.warp}
+            >
                 <img src={logo} alt="" />
                 <Form
                     name="loginForm"
@@ -53,7 +61,7 @@ export default function Login() {
                         </Button>
                     </Form.Item>
                 </Form>
-            </div>
+            </motion.div>
         </div>
     )
 }

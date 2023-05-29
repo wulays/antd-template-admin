@@ -25,7 +25,7 @@ const routes: RouteItem[] = [
         children: [
             {
                 path: '/home',
-                element: lazyLoad(() => import('../pages/home')),
+                element: lazyLoad(() => import('@/pages/home')),
                 meta: { name: '主页', icon: 'ant-design:desktop-outlined' }
             },
             {

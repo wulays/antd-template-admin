@@ -6,6 +6,9 @@
     bottom: 0;
     overflow: hidden;
     background: #e9f2f8;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     .bg {
         position: absolute;
         bottom: 0;
@@ -14,10 +17,6 @@
 }
 
 .warp {
-    position: absolute;
-    right: 10%;
-    top: 50%;
-    transform: translateY(-50%);
     width: 400px;
     height: 600px;
     background: #fff;
@@ -38,7 +37,5 @@
         width: 340px;
         height: 520px;
         padding: 50px 30px 0;
-        right: 50%;
-        transform: translate(50%, -50%);
     }
 }

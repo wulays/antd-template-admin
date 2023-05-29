@@ -3,12 +3,15 @@ import { Avatar, Dropdown } from 'antd'
 import type { MenuProps } from 'antd'
 import SvgIcon from '@/components/SvgIcon'
 import { Link } from 'react-router-dom'
+import useUserStore from '@/store/modules/user.ts'
 
 export default function Tools() {
+    const userStore = useUserStore()
+
     const menuList: MenuProps['items'] = [
         {
             key: 'home',
-            label: <Link to="/home">首页</Link>
+            label: <Link to={userStore.homepath || '/'}>首页</Link>
         },
         {
             type: 'divider'
@@ -23,9 +26,9 @@ export default function Tools() {
     return (
         <div className={styles.user}>
             <Dropdown menu={{ items: menuList }} placement="bottom" arrow={{ pointAtCenter: true }}>
-                <div>
+                <div style={{ display: 'flex', alignItems: 'center' }}>
                     <Avatar size={28} icon={<SvgIcon name="ant-design:user-outlined" />} />
-                    wulays
+                    {userStore.userName}
                 </div>
             </Dropdown>
         </div>

@@ -3,3 +3,4 @@
 
 pnpm fix
 pnpm format
+git add .

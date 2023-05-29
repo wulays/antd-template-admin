@@ -9,7 +9,6 @@ export function userList() {
             password: '123456',
             avatar: '',
             token: 'fake-token-1',
-            homePath: '/',
             roles: ['super']
         },
         {
@@ -19,7 +18,7 @@ export function userList() {
             password: 'test',
             avatar: '',
             token: 'fake-token-2',
-            homePath: '/',
+            homepath: '/home',
             roles: ['test']
         }
     ]

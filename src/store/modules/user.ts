@@ -17,6 +17,7 @@ export interface userInfoType {
     realName?: string
     avatar?: string
     homepath?: string
+    pd?: string
     roles: RoleInfo[]
 }
 
@@ -43,6 +44,10 @@ const useUserStore = create<Store>()(
                     login: async (params) => {
                         try {
                             const { data } = await login(params)
+                            // 如果记住密码
+                            if (params.remember) {
+                                data.pd = atob(params.password)
+                            }
                             set(() => data)
                             return data
                         } catch (e) {
