@@ -1,0 +1,7 @@
+.user{
+  margin: 0 10px;
+  cursor: pointer;
+  :global(.ant-avatar) {
+    margin-right: 10px;
+  }
+}

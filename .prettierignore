@@ -1,0 +1,8 @@
+/dist/*
+/dist-test/*
+.idea
+/node_modules/**
+**/*.svg
+**/*.sh
+/public/
+.vscode/
