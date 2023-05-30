@@ -1,0 +1,78 @@
+.container{
+    padding: 30px;
+    background-color: #f0f2f5;
+}
+
+.panelWarp{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    .panel{
+        width: 25%;
+        margin: 15px 0;
+        padding: 15px;
+        display: flex;
+        cursor: pointer;
+        align-items: center;
+        background-color: #fff;
+        justify-content: space-between;
+        box-shadow: 4px 4px 40px rgba(0,0,0,.05);
+        &:not(:nth-last-child(1)) {
+            margin-right: 15px;
+        }
+
+        p{
+            margin: 0;
+            font-weight: bold;
+            font-size: 18px;
+        }
+        > div {
+            color: #666;
+            height: 42px;
+            display: flex;
+            font-size: 12px;
+            text-align: right;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+    }
+    .icon {
+        padding: 5px;
+        font-size: 48px;
+        border-radius: 5px;
+        transition: all .1s;
+        box-sizing: content-box;
+    }
+    $iconColor: (#40c9c6, #36a3f7, #f4516c, #4ec8af);
+    @each $c in $iconColor{
+        $i:index($iconColor, $c);
+        .panel:nth-child(#{$i}) {
+            .icon {
+                color: $c;
+            }
+            &:hover .icon {
+                color: #fff;
+                background-color: $c;
+            }
+        }
+    }
+}
+
+.lineChart{
+    margin: 25px 0;
+    padding: 25px;
+    background-color: #fff;
+    box-shadow: 4px 4px 40px rgba(0,0,0,.05);
+}
+
+.cardChart{
+    display: flex;
+    justify-content: space-between;
+    .card {
+        width: 33%;
+        padding: 25px;
+        background-color: #ffffff;
+    }
+}

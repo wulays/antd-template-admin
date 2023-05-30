@@ -18,7 +18,7 @@ export function userList() {
             password: 'test',
             avatar: '',
             token: 'fake-token-2',
-            homepath: '/home',
+            homepath: '/dashboard',
             roles: ['test']
         }
     ]

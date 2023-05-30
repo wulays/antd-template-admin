@@ -23,7 +23,7 @@ export default function Layout() {
     const navigate = useNavigate()
 
     // 需要权限的路由
-    const authRoutes = routes.routes.find((_) => _.path === '/')?.children || []
+    const authRoutes = routes.routes
     // 当前匹配的路由列表
     const routeList = matchRoutes(authRoutes, location) || []
     // 当前路由
@@ -37,10 +37,9 @@ export default function Layout() {
     const [scope, animate] = useAnimate()
 
     useEffect(() => {
-        if (!route?.path) {
-            // 判断是否有设置主页有则显示没有则选用权限路由第一个
-            const path = userStore.homepath || authRoutes[0]?.path || '/login'
-            navigate(path === '/' ? '/home' : path)
+        if (route.children) {
+            // 判断是否有子集有则显示第一个
+            navigate(route.children[0].path || userStore.homepath || '/')
             return
         }
         animate('div', { opacity: [0, 1] })
@@ -52,7 +51,12 @@ export default function Layout() {
             <div className={styles.container}>
                 <div className={`${styles['side-bar']} ${systemStore.collapsMenu ? styles.collapsed : ''}`}>
                     {systemStore.showHeader ? (
-                        <SideBar collapsMenu={systemStore.collapsMenu} authMenu={authRoutes} route={route} />
+                        <SideBar
+                            collapsMenu={systemStore.collapsMenu}
+                            authMenu={authRoutes}
+                            defaultOpenKeys={routeList.slice(0, -1).map((_) => _.pathname)}
+                            route={route}
+                        />
                     ) : (
                         <Drawer
                             placement="left"
@@ -69,6 +73,7 @@ export default function Layout() {
                                 collapsMenu={false}
                                 authMenu={authRoutes}
                                 route={route}
+                                defaultOpenKeys={routeList.slice(0, -1).map((_) => _.pathname)}
                                 onClick={systemStore.toggleCollapsMenu}
                             />
                         </Drawer>

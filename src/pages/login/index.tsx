@@ -3,18 +3,18 @@ import bg from '@/assets/images/login/bg.svg'
 import logo from '@/assets/images/logo.png'
 import { Form, Input, Checkbox, Button } from 'antd'
 import { useNavigate } from 'react-router-dom'
-import useUserStore, { userLoginType } from '@/store/modules/user.ts'
+import useUserStore from '@/store/modules/user.ts'
 import { motion } from 'framer-motion'
+import type { userLoginReqType } from '@/api/user/type.ts'
 
 export default function Login() {
     const navigate = useNavigate()
     const userStore = useUserStore()
 
-    async function handleLogin(params: userLoginType) {
+    async function handleLogin(params: userLoginReqType) {
         try {
-            const data = await userStore.login(params)
-            console.log(data)
-            navigate('/home')
+            await userStore.login(params)
+            navigate('/dashboard')
         } catch (e) {
             console.log(e)
         }

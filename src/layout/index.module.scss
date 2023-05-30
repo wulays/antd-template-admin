@@ -25,6 +25,7 @@
 .side-bar {
     width: 240px;
     height: 100%;
+    flex-shrink: 0;
     transition: width .3s;
     overflow-y: auto;
     overflow-x: hidden;

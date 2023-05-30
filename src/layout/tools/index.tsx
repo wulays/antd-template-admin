@@ -10,7 +10,7 @@ export default function Tools() {
 
     const menuList: MenuProps['items'] = [
         {
-            key: 'home',
+            key: 'dashboard',
             label: <Link to={userStore.homepath || '/'}>首页</Link>
         },
         {
