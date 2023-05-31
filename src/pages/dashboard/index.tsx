@@ -1,9 +1,8 @@
 import styles from './index.module.scss'
 import SvgIcon from '@/components/SvgIcon'
-import Line from '@/components/Charts/Line.tsx'
-import Pie from '@/components/Charts/Pie.tsx'
-import Bar from '@/components/Charts/Bar.tsx'
-import Funnel from '@/components/Charts/Funnel.tsx'
+import Chart from '@/components/Charts'
+import { Table } from 'antd'
+import { barOption, FunnelOption, LineOption, PieOption, barOption2 } from './chart-options.ts'
 
 export default function Home() {
     const panelList = [
@@ -34,9 +33,42 @@ export default function Home() {
     ]
 
     const cardList = [
-        { id: 1, el: <Pie height="300px" /> },
-        { id: 2, el: <Bar height="300px" /> },
-        { id: 3, el: <Funnel height="300px" /> }
+        { id: 1, el: <Chart options={PieOption()} height="300px" /> },
+        { id: 2, el: <Chart options={barOption()} height="300px" /> },
+        { id: 3, el: <Chart options={FunnelOption()} height="300px" /> }
+    ]
+
+    const dataSource = [
+        {
+            key: '1',
+            name: '胡彦斌',
+            age: 32,
+            address: '西湖区湖底公园1号'
+        },
+        {
+            key: '2',
+            name: '胡彦祖',
+            age: 42,
+            address: '西湖区湖底公园1号'
+        }
+    ]
+
+    const columns = [
+        {
+            title: '姓名',
+            dataIndex: 'name',
+            key: 'name'
+        },
+        {
+            title: '年龄',
+            dataIndex: 'age',
+            key: 'age'
+        },
+        {
+            title: '住址',
+            dataIndex: 'address',
+            key: 'address'
+        }
     ]
 
     return (
@@ -56,7 +88,7 @@ export default function Home() {
             </div>
 
             <div className={styles.lineChart}>
-                <Line height="280px" />
+                <Chart options={LineOption()} height="280px" />
             </div>
 
             <div className={styles.cardChart}>
@@ -65,6 +97,19 @@ export default function Home() {
                         <div style={{ backgroundColor: '#fff', padding: '15px' }}>{chart.el}</div>
                     </div>
                 ))}
+            </div>
+
+            <div className={styles.cardChart}>
+                <div className={styles.table}>
+                    <div>
+                        <Table dataSource={dataSource} columns={columns} />
+                    </div>
+                </div>
+                <div className={styles.chart}>
+                    <div>
+                        <Chart options={barOption2()} height="300px" />
+                    </div>
+                </div>
             </div>
         </div>
     )

@@ -52,7 +52,7 @@
     $iconColor: (#40c9c6, #36a3f7, #f4516c, #4ec8af);
     @each $c in $iconColor{
         $i:index($iconColor, $c);
-        .panel:nth-child(#{$i}) {
+        .panel:nth-child(#{$i}) > div {
             .icon {
                 color: $c;
             }
@@ -78,6 +78,18 @@
     .card {
         width: 33%;
         padding: 25px;
+    }
+
+    .table,.chart{
+        width: 60%;
+        padding: 25px;
+        > div{
+            padding: 25px;
+            background-color: #fff;
+        }
+    }
+    .chart{
+        width: 40%;
     }
 }
 

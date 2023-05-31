@@ -1,4 +1,5 @@
 @import "variable";
+
 // 媒体查询
 @mixin responsive($width) {
     @if $width == $width-small {

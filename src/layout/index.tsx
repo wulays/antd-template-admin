@@ -14,6 +14,7 @@ import logo from '@/assets/images/logo.png'
 import { useAnimate } from 'framer-motion'
 import { useEffect } from 'react'
 import useUserStore from '@/store/modules/user.ts'
+import useNProgress from '@/hooks/useNProgress.tsx'
 
 export default function Layout() {
     const systemStore = useSystemStore()
@@ -35,6 +36,8 @@ export default function Layout() {
     })
 
     const [scope, animate] = useAnimate()
+
+    useNProgress()
 
     useEffect(() => {
         if (route.children) {

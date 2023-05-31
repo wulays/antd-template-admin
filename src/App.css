@@ -1,3 +1,13 @@
 #root{
     height: 100%;
 }
+
+html::-webkit-scrollbar-thumb {
+    border-radius: 3px;
+    background-color: #999;
+}
+
+html::-webkit-scrollbar {
+     width: 5px;
+     background-color: #efefef;
+ }

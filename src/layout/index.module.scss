@@ -10,14 +10,14 @@
 .container {
     flex: 1;
     display: flex;
-    align-items: center;
     justify-content: space-between;
 }
 
 .main {
-    width: calc(100% - 240px);
     height: 100%;
+    overflow: hidden;
     transition: width .3s;
+    width: calc(100% - 240px);
 }
 
 .content {
@@ -27,12 +27,14 @@
 }
 
 .side-bar {
+    top: 0;
     width: 240px;
-    height: 100%;
     flex-shrink: 0;
-    transition: width .3s;
+    position: sticky;
     overflow-y: auto;
     overflow-x: hidden;
+    transition: width .3s;
+    height: calc(100vh - 81px);
     border-right: 1px solid #e8e8e8;
     box-shadow: 10px 0 10px -10px rgb(0 0 0 / 12%);
 
@@ -68,9 +70,20 @@
 
 @include responsive($width-small) {
     .main {
+        transition: width 0s;
         width: 100% !important;
     }
     .side-bar {
         display: none;
+    }
+    :global(.ant-drawer-body){
+        &::-webkit-scrollbar-thumb {
+            border-radius: 3px;
+            background-color: #999;
+        }
+        &::-webkit-scrollbar {
+            width: 5px;
+            background-color: #efefef;
+        }
     }
 }
