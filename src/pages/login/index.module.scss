@@ -1,3 +1,6 @@
+@import "@/styles/media";
+@import "@/styles/variable";
+
 .container {
     position: absolute;
     top: 0;
@@ -32,7 +35,7 @@
     }
 }
 
-@media (max-width: 500px) {
+@include responsive($width-small) {
     .warp {
         width: 340px;
         height: 520px;

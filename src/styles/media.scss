@@ -1,0 +1,17 @@
+@import "variable";
+// 媒体查询
+@mixin responsive($width) {
+    @if $width == $width-small {
+        @media (max-width: $width-small) {
+            @content
+        }
+    } @else if $width == $width-medium {
+        @media (max-width: $width-medium) {
+            @content
+        }
+    } @else if $width == $width-large {
+        @media (max-width: $width-large) {
+            @content
+        }
+    }
+}

@@ -40,14 +40,6 @@ export default function Line(props: Props) {
         ],
         series: [
             {
-                name: 'Direct',
-                type: 'bar',
-                emphasis: {
-                    focus: 'series'
-                },
-                data: [320, 332, 301, 334, 390, 330, 320]
-            },
-            {
                 name: 'Email',
                 type: 'bar',
                 stack: 'Ad',
@@ -87,43 +79,6 @@ export default function Line(props: Props) {
                     },
                     data: [[{ type: 'min' }, { type: 'max' }]]
                 }
-            },
-            {
-                name: 'Baidu',
-                type: 'bar',
-                barWidth: 5,
-                stack: 'Search Engine',
-                emphasis: {
-                    focus: 'series'
-                },
-                data: [620, 732, 701, 734, 1090, 1130, 1120]
-            },
-            {
-                name: 'Google',
-                type: 'bar',
-                stack: 'Search Engine',
-                emphasis: {
-                    focus: 'series'
-                },
-                data: [120, 132, 101, 134, 290, 230, 220]
-            },
-            {
-                name: 'Bing',
-                type: 'bar',
-                stack: 'Search Engine',
-                emphasis: {
-                    focus: 'series'
-                },
-                data: [60, 72, 71, 74, 190, 130, 110]
-            },
-            {
-                name: 'Others',
-                type: 'bar',
-                stack: 'Search Engine',
-                emphasis: {
-                    focus: 'series'
-                },
-                data: [62, 82, 91, 84, 109, 110, 120]
             }
         ]
     }
@@ -139,7 +94,12 @@ export default function Line(props: Props) {
     }, [])
 
     useEffect(() => {
-        chart?.resize()
+        const timer = setTimeout(() => {
+            chart?.resize()
+        }, 200)
+        return () => {
+            clearTimeout(timer)
+        }
     }, [chart, systemStore.width])
 
     return <div ref={chartRef} style={{ height: props.height, width: '100%' }}></div>

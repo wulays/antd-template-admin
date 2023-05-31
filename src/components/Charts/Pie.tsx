@@ -18,11 +18,12 @@ export default function Pie(props: Props) {
             trigger: 'item'
         },
         legend: {
-            top: '5%',
+            top: '0%',
             left: 'center'
         },
         series: [
             {
+                top: 30,
                 name: 'Access From',
                 type: 'pie',
                 radius: ['40%', '70%'],
@@ -43,7 +44,6 @@ export default function Pie(props: Props) {
                 },
                 data: [
                     { value: 1048, name: 'Search Engine' },
-                    { value: 735, name: 'Direct' },
                     { value: 580, name: 'Email' },
                     { value: 484, name: 'Union Ads' },
                     { value: 300, name: 'Video Ads' }
@@ -63,7 +63,12 @@ export default function Pie(props: Props) {
     }, [])
 
     useEffect(() => {
-        chart?.resize()
+        const timer = setTimeout(() => {
+            chart?.resize()
+        }, 200)
+        return () => {
+            clearTimeout(timer)
+        }
     }, [chart, systemStore.width])
 
     return <div ref={chartRef} style={{ height: props.height, width: '100%' }}></div>

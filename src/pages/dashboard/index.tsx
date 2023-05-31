@@ -34,9 +34,9 @@ export default function Home() {
     ]
 
     const cardList = [
-        { id: 1, el: <Pie height="280px" /> },
-        { id: 2, el: <Bar height="280px" /> },
-        { id: 3, el: <Funnel height="280px" /> }
+        { id: 1, el: <Pie height="300px" /> },
+        { id: 2, el: <Bar height="300px" /> },
+        { id: 3, el: <Funnel height="300px" /> }
     ]
 
     return (
@@ -44,10 +44,12 @@ export default function Home() {
             <div className={styles.panelWarp}>
                 {panelList.map((panel) => (
                     <div className={styles.panel} key={panel.id}>
-                        <SvgIcon className={styles.icon} name={panel.icon} />
                         <div>
-                            <span>{panel.title}</span>
-                            <p>{panel.num.toFixed(2)}</p>
+                            <SvgIcon className={styles.icon} name={panel.icon} />
+                            <div>
+                                <span>{panel.title}</span>
+                                <p>{panel.num.toFixed(2)}</p>
+                            </div>
                         </div>
                     </div>
                 ))}
@@ -60,7 +62,7 @@ export default function Home() {
             <div className={styles.cardChart}>
                 {cardList.map((chart) => (
                     <div className={styles.card} key={chart.id}>
-                        <div style={{ backgroundColor: '#fff', padding: '0 15px' }}>{chart.el}</div>
+                        <div style={{ backgroundColor: '#fff', padding: '15px' }}>{chart.el}</div>
                     </div>
                 ))}
             </div>

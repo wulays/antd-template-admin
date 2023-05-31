@@ -1,3 +1,6 @@
+@import "@/styles/media";
+@import "@/styles/variable";
+
 .container{
     padding: 30px;
     background-color: #f0f2f5;
@@ -5,36 +8,37 @@
 
 .panelWarp{
     display: flex;
+    margin: 0 -15px;
     align-items: center;
-    justify-content: space-between;
 
     .panel{
         width: 25%;
-        margin: 15px 0;
         padding: 15px;
-        display: flex;
-        cursor: pointer;
-        align-items: center;
-        background-color: #fff;
-        justify-content: space-between;
-        box-shadow: 4px 4px 40px rgba(0,0,0,.05);
-        &:not(:nth-last-child(1)) {
-            margin-right: 15px;
-        }
+         > div {
+             display: flex;
+             padding: 15px;
+             cursor: pointer;
+             margin-bottom: 15px;
+             align-items: center;
+             background-color: #fff;
+             justify-content: space-between;
+             box-shadow: 4px 4px 40px rgba(0,0,0,.05);
+
+             > div {
+                 color: #666;
+                 height: 42px;
+                 display: flex;
+                 font-size: 12px;
+                 text-align: right;
+                 flex-direction: column;
+                 justify-content: space-between;
+             }
+         }
 
         p{
             margin: 0;
             font-weight: bold;
             font-size: 18px;
-        }
-        > div {
-            color: #666;
-            height: 42px;
-            display: flex;
-            font-size: 12px;
-            text-align: right;
-            flex-direction: column;
-            justify-content: space-between;
         }
 
     }
@@ -69,9 +73,36 @@
 
 .cardChart{
     display: flex;
+    margin: 0 -25px;
     justify-content: space-between;
     .card {
         width: 33%;
         padding: 25px;
+    }
+}
+
+@include responsive($width-large) {
+    .panelWarp {
+        flex-wrap: wrap;
+        .panel {
+            width: 50%;
+        }
+    }
+}
+
+@include responsive($width-medium) {
+    .cardChart{
+        flex-wrap: wrap;
+        .card {
+            width: 100%;
+        }
+    }
+}
+
+@include responsive($width-small) {
+    .panelWarp {
+        .panel {
+            width: 100%;
+        }
     }
 }

@@ -14,9 +14,6 @@ export default function Line(props: Props) {
     const [chart, setChart] = useState<ECharts>()
 
     const options = {
-        title: {
-            text: 'Stacked Line'
-        },
         tooltip: {
             trigger: 'axis'
         },
@@ -82,7 +79,12 @@ export default function Line(props: Props) {
     }, [])
 
     useEffect(() => {
-        chart?.resize()
+        const timer = setTimeout(() => {
+            chart?.resize()
+        }, 200)
+        return () => {
+            clearTimeout(timer)
+        }
     }, [chart, systemStore.width])
 
     return <div ref={chartRef} style={{ height: props.height }}></div>

@@ -1,3 +1,6 @@
+@import "@/styles/media";
+@import "@/styles/variable";
+
 .warpper {
     height: 100%;
     display: flex;
@@ -63,7 +66,7 @@
     }
 }
 
-@media (max-width: 500px) {
+@include responsive($width-small) {
     .main {
         width: 100% !important;
     }
