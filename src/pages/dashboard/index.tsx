@@ -60,7 +60,7 @@ export default function Home() {
             <div className={styles.cardChart}>
                 {cardList.map((chart) => (
                     <div className={styles.card} key={chart.id}>
-                        {chart.el}
+                        <div style={{ backgroundColor: '#fff', padding: '0 15px' }}>{chart.el}</div>
                     </div>
                 ))}
             </div>

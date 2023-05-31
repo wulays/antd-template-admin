@@ -142,5 +142,5 @@ export default function Line(props: Props) {
         chart?.resize()
     }, [chart, systemStore.width])
 
-    return <div ref={chartRef} style={{ height: props.height }}></div>
+    return <div ref={chartRef} style={{ height: props.height, width: '100%' }}></div>
 }
