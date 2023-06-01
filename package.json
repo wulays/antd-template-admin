@@ -8,6 +8,7 @@
         "dev": "vite --host",
         "build": "tsc && vite build",
         "build:test": "tsc && vite build --mode test",
+        "build:docs": "tsc && vite build --mode docs --base=/antd-template-admin/",
         "lint": "eslint src --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
         "fix": "eslint src --fix",
         "preview": "vite preview",

@@ -1,4 +1,4 @@
-import { createBrowserRouter } from 'react-router-dom'
+import { createHashRouter } from 'react-router-dom'
 import type { RouteObject } from 'react-router-dom'
 import Layout from '@/layout'
 import Page404 from '@/pages/404'
@@ -98,6 +98,6 @@ const routes: RouteItem[] = [
     }
 ]
 
-const router = createBrowserRouter(routes as RouteObject[])
+const router = createHashRouter(routes as RouteObject[])
 
 export default router

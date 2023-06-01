@@ -6,6 +6,7 @@ import { barOption, FunnelOption, LineOption, PieOption, barOption2 } from './ch
 import { getOrderList } from '@/api/order'
 import { useCallback, useEffect, useState } from 'react'
 import cardBg from '@/assets/images/dashboard/cover.png'
+import { motion } from 'framer-motion'
 
 export default function Home() {
     const panelList = [
@@ -36,9 +37,9 @@ export default function Home() {
     ]
 
     const cardList = [
-        { id: 1, el: <Chart options={PieOption()} height="300px" /> },
-        { id: 2, el: <Chart options={barOption()} height="300px" /> },
-        { id: 3, el: <Chart options={FunnelOption()} height="300px" /> }
+        { id: 1, el: <Chart options={PieOption} height="300px" /> },
+        { id: 2, el: <Chart options={barOption} height="300px" /> },
+        { id: 3, el: <Chart options={FunnelOption} height="300px" /> }
     ]
 
     const tableState: {
@@ -106,7 +107,7 @@ export default function Home() {
             </div>
 
             <div className={styles.lineChart}>
-                <Chart options={LineOption()} height="280px" />
+                <Chart options={LineOption} height="280px" />
             </div>
 
             <div className={styles.cardChart}>
@@ -125,10 +126,24 @@ export default function Home() {
                 </div>
                 <div className={styles.chart}>
                     <div className={styles.cardBg}>
-                        <img src={cardBg} alt="" />
+                        <div>
+                            <motion.div
+                                animate={{
+                                    y: [-20, -50, -20]
+                                }}
+                                transition={{
+                                    duration: 1.5,
+                                    ease: 'easeInOut',
+                                    repeat: Infinity
+                                }}
+                            >
+                                <img src={cardBg} alt="" />
+                            </motion.div>
+                            <span>Antd Admin Template</span>
+                        </div>
                     </div>
                     <div>
-                        <Chart options={barOption2()} height="200px" />
+                        <Chart options={barOption2} height="200px" />
                     </div>
                 </div>
             </div>

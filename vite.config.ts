@@ -1,4 +1,4 @@
-import { defineConfig } from 'vite'
+import {defineConfig, Plugin} from 'vite'
 import react from '@vitejs/plugin-react'
 import path from 'path'
 
@@ -21,7 +21,8 @@ export default ({ command, mode }) => {
                 symbolId: 'icon-[dir]-[name]'
             }),
             viteMockServe({
-                localEnabled: command === 'serve'
+                localEnabled: true,
+                prodEnabled: mode === 'docs'
             })
         ],
         resolve: {
