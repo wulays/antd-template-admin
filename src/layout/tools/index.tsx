@@ -18,8 +18,9 @@ export default function Tools() {
         },
         {
             key: 'logut',
-            label: <Link to="/login">退出登录</Link>,
-            danger: true
+            label: '退出登录',
+            danger: true,
+            onClick: userStore.logout
         }
     ]
 

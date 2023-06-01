@@ -8,7 +8,7 @@ interface Props {
     options: EChartsOption
 }
 
-export default function Funnel(props: Props) {
+export default function Chart(props: Props) {
     const chartRef = useRef(null)
     const systemStore = useSystemStore()
 

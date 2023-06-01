@@ -7,6 +7,17 @@ interface Store extends userLoginResType {
     setName: (username: string) => void
     setInfo: (info: userLoginResType) => void
     login: (params: userLoginReqType) => Promise<userLoginResType>
+    logout: () => void
+}
+
+const initState = (): userLoginResType => {
+    return {
+        userId: 0,
+        userName: '',
+        realName: '',
+        avatar: '',
+        roles: []
+    }
 }
 
 const useUserStore = create<Store>()(
@@ -16,11 +27,7 @@ const useUserStore = create<Store>()(
                 const { errorMessage } = useMessage()
 
                 return {
-                    userId: 0,
-                    userName: '',
-                    realName: '',
-                    avatar: '',
-                    roles: [],
+                    ...initState(),
                     setName: (userName) => set(() => ({ userName })),
                     setInfo: (info) => set(() => info),
                     login: async (params) => {
@@ -36,7 +43,13 @@ const useUserStore = create<Store>()(
                             errorMessage(e)
                             return Promise.reject(e)
                         }
-                    }
+                    },
+                    logout: () =>
+                        set(() => {
+                            useUserStore.persist.clearStorage()
+                            location.replace('/login')
+                            return initState()
+                        })
                 }
             },
             {

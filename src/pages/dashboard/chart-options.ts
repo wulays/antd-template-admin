@@ -1,8 +1,6 @@
 import type { EChartsOption } from 'echarts'
 
-export declare type option = () => EChartsOption
-
-export const barOption: option = () => ({
+export const barOption: EChartsOption = {
     tooltip: {
         trigger: 'axis',
         axisPointer: {
@@ -70,9 +68,9 @@ export const barOption: option = () => ({
             }
         }
     ]
-})
+}
 
-export const FunnelOption: option = () => ({
+export const FunnelOption: EChartsOption = {
     tooltip: {
         trigger: 'item',
         formatter: '{a} <br/>{b} : {c}%'
@@ -123,9 +121,9 @@ export const FunnelOption: option = () => ({
             ]
         }
     ]
-})
+}
 
-export const LineOption: option = () => ({
+export const LineOption: EChartsOption = {
     tooltip: {
         trigger: 'axis'
     },
@@ -178,8 +176,8 @@ export const LineOption: option = () => ({
             data: [820, 932, 901, 934, 1290, 1330, 1320]
         }
     ]
-})
-export const PieOption: option = () => ({
+}
+export const PieOption: EChartsOption = {
     tooltip: {
         trigger: 'item'
     },
@@ -216,8 +214,8 @@ export const PieOption: option = () => ({
             ]
         }
     ]
-})
-export const barOption2: option = () => ({
+}
+export const barOption2: EChartsOption = {
     grid: {
         left: '3%',
         right: '4%',
@@ -231,7 +229,7 @@ export const barOption2: option = () => ({
     yAxis: [
         {
             show: true,
-            data: ['JavaScript', 'TypeScript', 'Vue', 'React', 'Css'],
+            data: ['JavaScript', 'TypeScript', 'Vue', 'React', 'CSS'],
             inverse: true,
             axisLine: {
                 show: false
@@ -312,4 +310,4 @@ export const barOption2: option = () => ({
             }
         }
     ]
-})
+}
