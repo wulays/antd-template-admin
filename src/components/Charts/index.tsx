@@ -23,7 +23,7 @@ export default function Funnel(props: Props) {
                 chart?.dispose()
             }
         }
-    }, [])
+    }, [props.options])
 
     useEffect(() => {
         const timer = setTimeout(() => {

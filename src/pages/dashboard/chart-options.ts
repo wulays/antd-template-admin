@@ -218,6 +218,13 @@ export const PieOption: option = () => ({
     ]
 })
 export const barOption2: option = () => ({
+    grid: {
+        left: '3%',
+        right: '4%',
+        top: '3%',
+        bottom: '3%',
+        containLabel: true
+    },
     xAxis: {
         show: false
     },
@@ -242,7 +249,6 @@ export const barOption2: option = () => ({
                         backgroundColor: '#339911',
                         color: '#fff',
                         borderRadius: 15,
-                        // padding: 5,
                         align: 'center',
                         width: 15,
                         height: 15
@@ -253,12 +259,10 @@ export const barOption2: option = () => ({
         {
             show: true,
             inverse: true,
-            data: [683, 234, 234, 523, 345],
+            data: [100, 100, 100, 100, 100],
             axisLabel: {
-                textStyle: {
-                    fontSize: 12,
-                    color: '#000'
-                }
+                fontSize: 12,
+                color: '#000'
             },
             axisLine: {
                 show: false
@@ -277,9 +281,9 @@ export const barOption2: option = () => ({
             type: 'bar',
             yAxisIndex: 0,
             data: [70, 34, 60, 78, 69],
-            barWidth: 7,
+            barWidth: 12,
             itemStyle: {
-                barBorderRadius: 7,
+                borderRadius: 12,
                 color: function (params) {
                     const myColor = ['#1089E7', '#F57474', '#56D0E3', '#F8B448', '#8B78F6']
                     const num = myColor.length
@@ -288,6 +292,7 @@ export const barOption2: option = () => ({
             },
             label: {
                 show: true,
+                color: '#fff',
                 position: 'inside',
                 formatter: '{c}%'
             }
@@ -298,14 +303,12 @@ export const barOption2: option = () => ({
             yAxisIndex: 1,
             barGap: '-100%',
             data: [100, 100, 100, 100, 100],
-            barWidth: 9,
+            barWidth: 14,
             itemStyle: {
-                normal: {
-                    color: 'none',
-                    borderColor: '#00c1de',
-                    borderWidth: 1,
-                    barBorderRadius: 9
-                }
+                color: 'none',
+                borderColor: '#00c1de',
+                borderWidth: 1,
+                borderRadius: 14
             }
         }
     ]

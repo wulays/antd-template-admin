@@ -2,14 +2,14 @@
 type userRole = 'super' | 'test'
 
 // 用户登录请求类型
-export interface userLoginReqType {
+interface userLoginReqType {
     username: string
     password: string
     remember: boolean
 }
 
 // 用户登录响应类型
-export interface userLoginResType {
+interface userLoginResType {
     userId: string | number
     userName: string
     realName?: string

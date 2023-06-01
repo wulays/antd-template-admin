@@ -5,7 +5,6 @@ import { Form, Input, Checkbox, Button } from 'antd'
 import { useNavigate } from 'react-router-dom'
 import useUserStore from '@/store/modules/user.ts'
 import { motion } from 'framer-motion'
-import type { userLoginReqType } from '@/api/user/type.ts'
 
 export default function Login() {
     const navigate = useNavigate()

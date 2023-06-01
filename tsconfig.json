@@ -21,6 +21,9 @@
         "noUnusedParameters": true,
         "noFallthroughCasesInSwitch": true
     },
+    "ts-node": {
+        "esm": true
+    },
     "include": ["src"],
     "references": [{ "path": "./tsconfig.node.json" }]
 }

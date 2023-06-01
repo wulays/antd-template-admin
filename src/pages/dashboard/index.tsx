@@ -1,8 +1,11 @@
 import styles from './index.module.scss'
 import SvgIcon from '@/components/SvgIcon'
 import Chart from '@/components/Charts'
-import { Table } from 'antd'
+import { Table, Tag } from 'antd'
 import { barOption, FunnelOption, LineOption, PieOption, barOption2 } from './chart-options.ts'
+import { getOrderList } from '@/api/order'
+import { useCallback, useEffect, useState } from 'react'
+import cardBg from '@/assets/images/dashboard/cover.png'
 
 export default function Home() {
     const panelList = [
@@ -38,38 +41,53 @@ export default function Home() {
         { id: 3, el: <Chart options={FunnelOption()} height="300px" /> }
     ]
 
-    const dataSource = [
+    const tableState: {
+        [key: string]: string
+    } = {
+        '0': 'error',
+        '1': 'success',
+        '2': 'processing'
+    }
+
+    const tableCol = [
         {
-            key: '1',
-            name: '胡彦斌',
-            age: 32,
-            address: '西湖区湖底公园1号'
+            title: '订单ID',
+            dataIndex: 'id'
         },
         {
-            key: '2',
-            name: '胡彦祖',
-            age: 42,
-            address: '西湖区湖底公园1号'
+            title: '价格',
+            dataIndex: 'price'
+        },
+        {
+            title: '状态',
+            dataIndex: 'state',
+            render: (state: string) => <Tag color={tableState[state]}>{tableState[state]}</Tag>
         }
     ]
 
-    const columns = [
-        {
-            title: '姓名',
-            dataIndex: 'name',
-            key: 'name'
-        },
-        {
-            title: '年龄',
-            dataIndex: 'age',
-            key: 'age'
-        },
-        {
-            title: '住址',
-            dataIndex: 'address',
-            key: 'address'
+    const [orderList, setOrderList] = useState<orderResType[]>([])
+
+    const [tableLoad, setTableLoad] = useState(false)
+    const loadOrderList = useCallback(async () => {
+        try {
+            setTableLoad(true)
+            const { data } = await getOrderList({ page: 1, list: 10 })
+            setTableLoad(false)
+            setOrderList(data)
+        } catch (e) {
+            setTableLoad(false)
+            console.log(e)
         }
-    ]
+    }, [])
+
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            loadOrderList()
+        })
+        return () => {
+            clearTimeout(timer)
+        }
+    }, [])
 
     return (
         <div className={styles.container}>
@@ -102,12 +120,15 @@ export default function Home() {
             <div className={styles.cardChart}>
                 <div className={styles.table}>
                     <div>
-                        <Table dataSource={dataSource} columns={columns} />
+                        <Table dataSource={orderList} columns={tableCol} rowKey="id" size="small" loading={tableLoad} />
                     </div>
                 </div>
                 <div className={styles.chart}>
+                    <div className={styles.cardBg}>
+                        <img src={cardBg} alt="" />
+                    </div>
                     <div>
-                        <Chart options={barOption2()} height="300px" />
+                        <Chart options={barOption2()} height="200px" />
                     </div>
                 </div>
             </div>

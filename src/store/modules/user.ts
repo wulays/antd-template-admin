@@ -2,7 +2,6 @@ import { create } from 'zustand'
 import { login } from '@/api/user'
 import useMessage from '@/hooks/uesMessage.tsx'
 import { devtools, persist, createJSONStorage } from 'zustand/middleware'
-import type { userLoginReqType, userLoginResType } from '@/api/user/type.ts'
 
 interface Store extends userLoginResType {
     setName: (username: string) => void

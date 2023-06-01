@@ -81,15 +81,26 @@
     }
 
     .table,.chart{
-        width: 60%;
+        width: calc(100% - 500px);
+        height: 600px;
         padding: 25px;
         > div{
             padding: 25px;
             background-color: #fff;
         }
+        .cardBg {
+            margin: -25px;
+            background-color: transparent;
+        }
+        img{
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            background-color: #61beff;
+        }
     }
     .chart{
-        width: 40%;
+        width: 500px;
     }
 }
 
@@ -100,6 +111,13 @@
             width: 50%;
         }
     }
+    .cardChart{
+        flex-wrap: wrap;
+        .table,.chart {
+            width: 100%;
+            height: auto;
+        }
+    }
 }
 
 @include responsive($width-medium) {
@@ -107,6 +125,7 @@
         flex-wrap: wrap;
         .card {
             width: 100%;
+            height: auto;
         }
     }
 }
