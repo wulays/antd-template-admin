@@ -1,6 +1,3 @@
-// 用户权限
-type userRole = 'super' | 'test'
-
 // 用户登录请求类型
 interface userLoginReqType {
     username: string
@@ -16,5 +13,5 @@ interface userLoginResType {
     avatar?: string
     homepath?: string
     pd?: string
-    roles: userRole[]
+    roles: userAuth[]
 }

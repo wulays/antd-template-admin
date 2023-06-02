@@ -1,4 +1,4 @@
-import { createBrowserRouter } from 'react-router-dom'
+import { createHashRouter } from 'react-router-dom'
 import type { RouteObject } from 'react-router-dom'
 import Layout from '@/layout'
 import Page404 from '@/pages/404'
@@ -14,6 +14,7 @@ export declare interface RouteItem extends Omit<RouteObject, 'children'> {
         icon?: string
         hidden?: boolean
         activeMenu?: string
+        auth?: userAuth[]
     }
     children?: RouteItem[]
 }
@@ -33,7 +34,7 @@ const routes: RouteItem[] = [
     {
         path: '/system',
         element: <Layout />,
-        meta: { name: '系统管理', icon: 'ant-design:tool-filled' },
+        meta: { name: '系统管理', icon: 'ant-design:tool-filled', auth: ['admin'] },
         children: [
             {
                 path: '/system/auth',
@@ -56,7 +57,7 @@ const routes: RouteItem[] = [
     {
         path: '/menu',
         element: <Layout />,
-        meta: { name: '菜单管理', icon: 'ant-design:appstore-add-outlined' },
+        meta: { name: '菜单管理', icon: 'ant-design:appstore-add-outlined', auth: ['admin', 'test'] },
         children: [
             {
                 path: '/menu/menu1',
@@ -66,7 +67,7 @@ const routes: RouteItem[] = [
                     {
                         path: '/menu/menu1/menu1-1',
                         element: lazyLoad(() => import('@/pages/menu/menu1/menu1-1.tsx')),
-                        meta: { name: '菜单1-1' }
+                        meta: { name: '菜单1-1', auth: ['admin'] }
                     },
                     {
                         path: '/menu/menu1/menu1-2',
@@ -98,6 +99,6 @@ const routes: RouteItem[] = [
     }
 ]
 
-const router = createBrowserRouter(routes as RouteObject[])
+const router = createHashRouter(routes as RouteObject[])
 
 export default router

@@ -1,5 +1,6 @@
 /dist/*
 /dist-test/*
+/dist-doc/*
 .idea
 /node_modules/**
 **/*.svg

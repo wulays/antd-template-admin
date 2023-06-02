@@ -14,7 +14,6 @@ import logo from '@/assets/images/logo.png'
 import { useAnimate } from 'framer-motion'
 import { useEffect } from 'react'
 import useUserStore from '@/store/modules/user.ts'
-import useNProgress from '@/hooks/useNProgress.tsx'
 
 export default function Layout() {
     const systemStore = useSystemStore()
@@ -25,8 +24,10 @@ export default function Layout() {
 
     // 需要权限的路由
     const authRoutes = routes.routes
+
     // 当前匹配的路由列表
     const routeList = matchRoutes(authRoutes, location) || []
+
     // 当前路由
     const route = routeList?.find((_) => _.pathname === location.pathname)?.route as RouteItem
 
@@ -36,8 +37,6 @@ export default function Layout() {
     })
 
     const [scope, animate] = useAnimate()
-
-    useNProgress()
 
     useEffect(() => {
         if (route.children) {

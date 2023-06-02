@@ -44,12 +44,12 @@ const useUserStore = create<Store>()(
                             return Promise.reject(e)
                         }
                     },
-                    logout: () =>
-                        set(() => {
+                    logout: () => {
+                        return set(() => {
                             useUserStore.persist.clearStorage()
-                            location.replace('/login')
                             return initState()
                         })
+                    }
                 }
             },
             {

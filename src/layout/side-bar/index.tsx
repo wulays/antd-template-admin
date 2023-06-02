@@ -1,7 +1,7 @@
 import { Menu } from 'antd'
 import type { MenuProps } from 'antd'
 import Icon from '@/components/SvgIcon'
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import type { RouteItem } from '@/router'
 
 type MenuItem = Required<MenuProps>['items'][number]
@@ -15,6 +15,7 @@ interface Props {
 }
 
 export default function SideBar(props: Props) {
+    const location = useLocation()
     // 当前选中菜单项
     const selectKeys = [props.route?.meta?.activeMenu || location.pathname]
 

@@ -2,11 +2,12 @@ import styles from './index.module.scss'
 import { Avatar, Dropdown } from 'antd'
 import type { MenuProps } from 'antd'
 import SvgIcon from '@/components/SvgIcon'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import useUserStore from '@/store/modules/user.ts'
 
 export default function Tools() {
     const userStore = useUserStore()
+    const navigate = useNavigate()
 
     const menuList: MenuProps['items'] = [
         {
@@ -20,7 +21,10 @@ export default function Tools() {
             key: 'logut',
             label: '退出登录',
             danger: true,
-            onClick: userStore.logout
+            onClick: () => {
+                userStore.logout()
+                navigate('/login')
+            }
         }
     ]
 

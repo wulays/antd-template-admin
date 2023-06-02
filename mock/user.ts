@@ -1,6 +1,6 @@
 import type { MockMethod } from 'vite-plugin-mock'
 
-export function userList() {
+function userList() {
     return [
         {
             userId: '1',
@@ -9,7 +9,7 @@ export function userList() {
             password: '123456',
             avatar: '',
             token: 'fake-token-1',
-            roles: ['super']
+            roles: ['admin']
         },
         {
             userId: '2',
