@@ -13,6 +13,7 @@ interface Store extends userLoginResType {
 const initState = (): userLoginResType => {
     return {
         userId: 0,
+        token: '',
         userName: '',
         realName: '',
         avatar: '',

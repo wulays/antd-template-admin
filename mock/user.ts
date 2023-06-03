@@ -26,7 +26,7 @@ function userList() {
 
 export default [
     {
-        url: '/api/user/login',
+        url: '/antd-template-admin/api/user/login',
         method: 'post',
         response: ({ body }) => {
             const user = userList().find((user) => user.userName === body.username)

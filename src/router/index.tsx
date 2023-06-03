@@ -1,12 +1,19 @@
 import { createHashRouter } from 'react-router-dom'
 import type { RouteObject } from 'react-router-dom'
-import Layout from '@/layout'
-import Page404 from '@/pages/404'
 import { createElement, lazy, Suspense } from 'react'
 import LoadPage from '@/components/LoadPage'
+import Guard from '@/router/Guard.tsx'
+
 function lazyLoad<T extends () => Promise<{ default: React.ComponentType }>>(src: T) {
-    return <Suspense fallback={<LoadPage />}>{createElement(lazy(src))}</Suspense>
+    return (
+        <Suspense fallback={<LoadPage />}>
+            <Guard>{createElement(lazy(src))}</Guard>
+        </Suspense>
+    )
 }
+
+const Layout = lazyLoad(() => import('@/layout'))
+const Page404 = lazyLoad(() => import('@/pages/404'))
 
 export declare interface RouteItem extends Omit<RouteObject, 'children'> {
     meta?: {
@@ -14,6 +21,8 @@ export declare interface RouteItem extends Omit<RouteObject, 'children'> {
         icon?: string
         hidden?: boolean
         activeMenu?: string
+        alwaysShow?: boolean
+        white?: boolean
         auth?: userAuth[]
     }
     children?: RouteItem[]
@@ -22,7 +31,7 @@ export declare interface RouteItem extends Omit<RouteObject, 'children'> {
 const routes: RouteItem[] = [
     {
         path: '/',
-        element: <Layout />,
+        element: Layout,
         children: [
             {
                 path: '/dashboard',
@@ -33,7 +42,7 @@ const routes: RouteItem[] = [
     },
     {
         path: '/system',
-        element: <Layout />,
+        element: Layout,
         meta: { name: '系统管理', icon: 'ant-design:tool-filled', auth: ['admin'] },
         children: [
             {
@@ -56,13 +65,13 @@ const routes: RouteItem[] = [
     },
     {
         path: '/menu',
-        element: <Layout />,
+        element: Layout,
         meta: { name: '菜单管理', icon: 'ant-design:appstore-add-outlined', auth: ['admin', 'test'] },
         children: [
             {
                 path: '/menu/menu1',
                 element: lazyLoad(() => import('@/pages/menu/menu1')),
-                meta: { name: '菜单1' },
+                meta: { name: '菜单1', alwaysShow: true },
                 children: [
                     {
                         path: '/menu/menu1/menu1-1',
@@ -90,12 +99,12 @@ const routes: RouteItem[] = [
     {
         path: '/login',
         element: lazyLoad(() => import('@/pages/login')),
-        meta: { hidden: true }
+        meta: { hidden: true, white: true }
     },
     {
         path: '*',
-        element: <Page404 />,
-        meta: { hidden: true }
+        element: Page404,
+        meta: { hidden: true, white: true }
     }
 ]
 

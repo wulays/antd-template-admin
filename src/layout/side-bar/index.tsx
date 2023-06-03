@@ -3,6 +3,7 @@ import type { MenuProps } from 'antd'
 import Icon from '@/components/SvgIcon'
 import { Link, useLocation } from 'react-router-dom'
 import type { RouteItem } from '@/router'
+import useUserStore from '@/store/modules/user.ts'
 
 type MenuItem = Required<MenuProps>['items'][number]
 
@@ -16,6 +17,7 @@ interface Props {
 
 export default function SideBar(props: Props) {
     const location = useLocation()
+    const userStore = useUserStore()
     // 当前选中菜单项
     const selectKeys = [props.route?.meta?.activeMenu || location.pathname]
 
@@ -25,7 +27,8 @@ export default function SideBar(props: Props) {
     // 过滤隐藏项
     function filterMenuItem(list: RouteItem[]): RouteItem[] {
         return list.filter((_) => {
-            return !_?.meta?.hidden
+            // 如果不隐藏菜单栏同时有权限
+            return !_?.meta?.hidden && (!_.meta?.auth || userStore.roles.some((role) => _.meta?.auth?.includes(role)))
         })
     }
     // 路由生成菜单
@@ -33,7 +36,7 @@ export default function SideBar(props: Props) {
         return list.map((item) => {
             const filterChild = item.children && filterMenuItem(item.children)
             // 如果只有一个子元素同时
-            if (filterChild && filterChild.length === 1) {
+            if (filterChild && filterChild.length === 1 && !item.meta?.alwaysShow) {
                 const child = filterChild[0]
                 const path = child.path || item.path
                 const icon = child.meta?.icon || item.meta?.icon

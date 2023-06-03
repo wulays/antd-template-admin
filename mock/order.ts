@@ -16,7 +16,7 @@ function orderList(query) {
 
 export default [
     {
-        url: '/api/order/list',
+        url: '/antd-template-admin/api/order/list',
         method: 'get',
         timeout: 1000,
         response: ({ query }) => {

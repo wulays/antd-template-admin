@@ -22,12 +22,8 @@ export default function Layout() {
     const location = useLocation()
     const navigate = useNavigate()
 
-    // 需要权限的路由
-    const authRoutes = routes.routes
-
     // 当前匹配的路由列表
-    const routeList = matchRoutes(authRoutes, location) || []
-
+    const routeList = matchRoutes(routes.routes, location) || []
     // 当前路由
     const route = routeList?.find((_) => _.pathname === location.pathname)?.route as RouteItem
 
@@ -55,7 +51,7 @@ export default function Layout() {
                     {systemStore.showHeader ? (
                         <SideBar
                             collapsMenu={systemStore.collapsMenu}
-                            authMenu={authRoutes}
+                            authMenu={routes.routes}
                             defaultOpenKeys={routeList.slice(0, -1).map((_) => _.pathname)}
                             route={route}
                         />
@@ -73,7 +69,7 @@ export default function Layout() {
                             </div>
                             <SideBar
                                 collapsMenu={false}
-                                authMenu={authRoutes}
+                                authMenu={routes.routes}
                                 route={route}
                                 defaultOpenKeys={routeList.slice(0, -1).map((_) => _.pathname)}
                                 onClick={systemStore.toggleCollapsMenu}
