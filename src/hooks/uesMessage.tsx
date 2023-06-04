@@ -9,7 +9,9 @@ function successMessage(msg: string) {
 }
 
 function errorMessage<T>(e: T) {
-    message.error((e as httpError).message)
+    if (!(e instanceof Error)) {
+        message.error((e as httpError).message)
+    }
 }
 
 export default function useMessage() {

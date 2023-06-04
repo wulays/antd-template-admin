@@ -23,7 +23,7 @@ export default function Chart(props: Props) {
                 chart?.dispose()
             }
         }
-    }, [props.options])
+    }, [props.options, systemStore.collapsMenu])
 
     useEffect(() => {
         const timer = setTimeout(() => {

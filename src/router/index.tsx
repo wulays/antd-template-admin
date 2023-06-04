@@ -60,13 +60,21 @@ const routes: RouteItem[] = [
                     name: '用户管理',
                     icon: 'ant-design:user-outlined'
                 }
+            },
+            {
+                path: '/system/add-user/:id',
+                element: lazyLoad(() => import('@/pages/system/user/add-user')),
+                meta: {
+                    name: '新增用户',
+                    hidden: true
+                }
             }
         ]
     },
     {
         path: '/menu',
         element: Layout,
-        meta: { name: '菜单管理', icon: 'ant-design:appstore-add-outlined', auth: ['admin', 'test'] },
+        meta: { name: '嵌套路由', icon: 'ant-design:appstore-add-outlined', auth: ['admin', 'test'] },
         children: [
             {
                 path: '/menu/menu1',

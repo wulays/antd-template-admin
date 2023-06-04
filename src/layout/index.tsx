@@ -5,6 +5,7 @@ import Header from './header'
 
 import useSystemStore from '@/store/modules/system.ts'
 import TopBar from '@/layout/top-bar'
+import Tags from '@/layout/tag-view'
 import { Drawer } from 'antd'
 import { matchRoutes, Outlet, useLocation, useNavigate } from 'react-router-dom'
 import routes from '@/router'
@@ -79,6 +80,7 @@ export default function Layout() {
                 </div>
                 <div className={styles.main}>
                     <TopBar list={breadcrumbList} />
+                    <Tags route={route} />
                     <div ref={scope} className={styles.content}>
                         <Outlet />
                     </div>

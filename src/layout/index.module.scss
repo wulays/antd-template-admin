@@ -41,16 +41,6 @@
     :global .ant-menu.ant-menu-root {
         border-right: none;
     }
-
-    &::-webkit-scrollbar-thumb {
-        border-radius: 3px;
-        background-color: #999;
-    }
-
-    &::-webkit-scrollbar {
-        width: 5px;
-        background-color: #efefef;
-    }
 }
 .logo{
     padding: 5px 10px 10px;
