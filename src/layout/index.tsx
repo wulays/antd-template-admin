@@ -67,6 +67,7 @@ export default function Layout() {
                         >
                             <div className={styles.logo}>
                                 <img src={logo} alt="" />
+                                <span>Antd Admin Template</span>
                             </div>
                             <SideBar
                                 collapsMenu={false}

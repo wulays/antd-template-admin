@@ -11,6 +11,7 @@ export default function Header() {
         <div className={styles.warp}>
             <div className={styles.logo}>
                 <img src={logo} alt="" />
+                <span>Antd Admin Template</span>
             </div>
             {systemStore.hasHeader && <Tools />}
         </div>

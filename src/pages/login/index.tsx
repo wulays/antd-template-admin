@@ -29,10 +29,14 @@ export default function Login() {
                 }}
                 className={styles.warp}
             >
-                <img src={logo} alt="" />
+                <div className={styles.logo}>
+                    <img src={logo} alt="" />
+                    <span>Welecome back</span>
+                    <span>Hey, Enter your details to get sign in to your account</span>
+                </div>
                 <Form
                     name="loginForm"
-                    initialValues={{ remember: true }}
+                    initialValues={{ username: 'test', password: 'test', remember: true }}
                     autoComplete="off"
                     style={{ textAlign: 'left' }}
                     onFinish={handleLogin}

@@ -24,14 +24,30 @@
     height: 600px;
     background: #fff;
     border-radius: 3px;
-    padding: 50px 60px;
+    padding: 40px 60px;
     z-index: 3;
     text-align: center;
     box-shadow: 0 0 15px rgba(#000000, .1);
 
-    > img {
-        height: 54px;
-        margin-bottom: 60px;
+    .logo{
+        display: flex;
+        align-items: center;
+        text-align: center;
+        flex-direction: column;
+        > img {
+            width: 120px;
+        }
+        > span {
+            &:nth-child(2) {
+                color: #333;
+                font-size: 18px;
+                font-width: bold;
+                margin: 14px 0;
+            }
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 24px;
+        }
     }
 }
 

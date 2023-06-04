@@ -1,9 +1,10 @@
-import { Tag } from 'antd'
 import styles from './index.module.scss'
 import { RouteItem } from '@/router'
 import useSystemStore from '@/store/modules/system.ts'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { useCallback, useEffect } from 'react'
+import classNames from 'classnames'
+import SvgIcon from '@/components/SvgIcon'
 
 interface Props {
     route: RouteItem
@@ -41,15 +42,20 @@ export default function Tags(props: Props) {
     return (
         <div className={styles.container}>
             {systemStore.tagView.map((tag) => (
-                <Tag
-                    color={location.pathname === tag.path ? '#00a7e6' : ''}
+                <span
+                    className={classNames([styles.tag, location.pathname === tag.path ? styles.active : ''])}
                     key={tag.path}
-                    closable
                     onClick={() => handleGoToPage(tag.path)}
-                    onClose={() => handleRemoveTag(tag.path)}
                 >
                     {tag.title}
-                </Tag>
+                    <SvgIcon
+                        name="ant-design:close-outlined"
+                        onClick={(ev) => {
+                            ev.stopPropagation()
+                            handleRemoveTag(tag.path)
+                        }}
+                    />
+                </span>
             ))}
         </div>
     )

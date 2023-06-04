@@ -3,6 +3,7 @@ import { notification } from 'antd'
 import { login } from '@/api/user'
 import useMessage from '@/hooks/uesMessage.tsx'
 import { devtools, persist, createJSONStorage } from 'zustand/middleware'
+import useSystemStore from '@/store/modules/system.ts'
 
 interface Store extends userLoginResType {
     setName: (username: string) => void
@@ -53,6 +54,7 @@ const useUserStore = create<Store>()(
                     logout: () => {
                         return set(() => {
                             useUserStore.persist.clearStorage()
+                            useSystemStore.persist.clearStorage()
                             return initState()
                         })
                     }
