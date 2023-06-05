@@ -35,7 +35,7 @@
         text-align: center;
         flex-direction: column;
         > img {
-            width: 120px;
+            width: 124px;
         }
         > span {
             &:nth-child(2) {
@@ -55,6 +55,11 @@
     .warp {
         width: 340px;
         height: 520px;
-        padding: 50px 30px 0;
+        padding: 25px 30px 0;
+        .logo {
+            > img {
+                width: 80px;
+            }
+        }
     }
 }

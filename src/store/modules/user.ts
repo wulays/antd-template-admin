@@ -38,7 +38,7 @@ const useUserStore = create<Store>()(
                     setInfo: (info) => set(() => info),
                     login: async (params) => {
                         try {
-                            systemStore.changeLoadPage()
+                            systemStore.changeLoadPage(true)
                             const { data } = await login(params)
                             const {
                                 data: { auth }
@@ -47,7 +47,7 @@ const useUserStore = create<Store>()(
                             if (params.remember) {
                                 data.pd = atob(params.password)
                             }
-                            systemStore.changeLoadPage()
+                            systemStore.changeLoadPage(false)
                             set(() => ({ ...data, auth }))
                             notification.success({
                                 message: `欢迎回来 ${params.username}！`,
@@ -55,7 +55,7 @@ const useUserStore = create<Store>()(
                             })
                             return data
                         } catch (e) {
-                            systemStore.changeLoadPage()
+                            systemStore.changeLoadPage(false)
                             errorMessage(e)
                             return Promise.reject(e)
                         }
@@ -63,21 +63,21 @@ const useUserStore = create<Store>()(
                     logout: () => {
                         return set(() => {
                             useUserStore.persist.clearStorage()
-                            useSystemStore.persist.clearStorage()
+                            // useSystemStore.persist.clearStorage()
                             return initState()
                         })
                     },
                     loadAuth: async () => {
                         try {
-                            systemStore.changeLoadPage()
+                            systemStore.changeLoadPage(true)
                             const {
                                 data: { auth }
                             } = await getAuth()
-                            systemStore.changeLoadPage()
+                            systemStore.changeLoadPage(false)
                             set(() => ({ auth }))
                             return auth
                         } catch (e) {
-                            systemStore.changeLoadPage()
+                            systemStore.changeLoadPage(false)
                             errorMessage(e)
                             return Promise.reject(e)
                         }
