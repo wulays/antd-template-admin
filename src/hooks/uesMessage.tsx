@@ -1,4 +1,4 @@
-import { message } from 'antd'
+import { message } from '@/components/EscapeAntd'
 interface httpError {
     code: number
     message: string

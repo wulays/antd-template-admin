@@ -36,6 +36,15 @@ export default function Layout() {
     const [scope, animate] = useAnimate()
 
     useEffect(() => {
+        const timer = setTimeout(() => {
+            userStore.loadAuth()
+        }, 100)
+        return () => {
+            clearTimeout(timer)
+        }
+    }, [userStore.loadAuth])
+
+    useEffect(() => {
         if (route.children) {
             // 判断是否有子集有则显示第一个
             navigate(route.children[0].path || userStore.homepath || '/')

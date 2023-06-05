@@ -3,6 +3,8 @@ import './App.css'
 import router from '@/router'
 import { FC, useEffect } from 'react'
 import useSystemStore from '@/store/modules/system.ts'
+import { App as AntdApp, ConfigProvider } from 'antd'
+import EscapeAntd from '@/components/EscapeAntd.tsx'
 
 const App: FC = () => {
     const { setWidth } = useSystemStore()
@@ -14,7 +16,20 @@ const App: FC = () => {
         }
     }, [setWidth])
 
-    return <RouterProvider router={router} />
+    return (
+        <ConfigProvider
+            theme={{
+                token: {
+                    colorPrimary: '#00a7e6'
+                }
+            }}
+        >
+            <AntdApp>
+                <EscapeAntd />
+                <RouterProvider router={router} />
+            </AntdApp>
+        </ConfigProvider>
+    )
 }
 
 export default App

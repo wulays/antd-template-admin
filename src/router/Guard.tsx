@@ -22,7 +22,7 @@ export default function Guard(props: Props) {
         }
         // 判断当前路由是否有权限
         if (
-            !routeList.every((route) => !route.meta?.auth || userStore.roles.some((_) => route.meta?.auth?.includes(_)))
+            !routeList.every((route) => !route.meta?.auth || userStore.auth.some((_) => route.meta?.auth?.includes(_)))
         ) {
             return <Navigate to="/404" replace />
         }

@@ -24,6 +24,19 @@ function userList() {
     ]
 }
 
+function roleList() {
+    return [
+        {
+            token: 'fake-token-1',
+            auth: ['system:manage', 'system:auth', 'system:user', 'system:user:add', 'menu', 'menu:1', 'menu:1:1']
+        },
+        {
+            token: 'fake-token-2',
+            auth: ['system:manage', 'system:auth', 'menu', 'menu:1']
+        }
+    ]
+}
+
 export default [
     {
         url: '/antd-template-admin/api/user/login',
@@ -45,6 +58,23 @@ export default [
             return {
                 code: 200,
                 data: user
+            }
+        }
+    },
+    {
+        url: '/antd-template-admin/api/user/auth',
+        method: 'get',
+        response: ({ headers, query }) => {
+            const token = query.token || headers.token
+            if (!token) {
+                return {
+                    code: 401,
+                    message: '登录信息失效！'
+                }
+            }
+            return {
+                code: 200,
+                data: roleList().find((_) => _.token === token)
             }
         }
     }

@@ -43,14 +43,15 @@ const routes: RouteItem[] = [
     {
         path: '/system',
         element: Layout,
-        meta: { name: '系统管理', icon: 'ant-design:tool-filled', auth: ['admin'] },
+        meta: { name: '系统管理', icon: 'ant-design:tool-filled', auth: ['system:manage'], alwaysShow: true },
         children: [
             {
                 path: '/system/auth',
                 element: lazyLoad(() => import('@/pages/system/auth')),
                 meta: {
                     name: '权限管理',
-                    icon: 'ant-design:to-top-outlined'
+                    icon: 'ant-design:to-top-outlined',
+                    auth: ['system:auth']
                 }
             },
             {
@@ -58,7 +59,8 @@ const routes: RouteItem[] = [
                 element: lazyLoad(() => import('@/pages/system/user')),
                 meta: {
                     name: '用户管理',
-                    icon: 'ant-design:user-outlined'
+                    icon: 'ant-design:user-outlined',
+                    auth: ['system:user']
                 }
             },
             {
@@ -66,7 +68,8 @@ const routes: RouteItem[] = [
                 element: lazyLoad(() => import('@/pages/system/user/add-user')),
                 meta: {
                     name: '新增用户',
-                    hidden: true
+                    hidden: true,
+                    auth: ['system:user:add']
                 }
             }
         ]
@@ -74,17 +77,17 @@ const routes: RouteItem[] = [
     {
         path: '/menu',
         element: Layout,
-        meta: { name: '嵌套路由', icon: 'ant-design:appstore-add-outlined', auth: ['admin', 'test'] },
+        meta: { name: '嵌套路由', icon: 'ant-design:appstore-add-outlined', auth: ['menu'] },
         children: [
             {
                 path: '/menu/menu1',
                 element: lazyLoad(() => import('@/pages/menu/menu1')),
-                meta: { name: '菜单1', alwaysShow: true },
+                meta: { name: '菜单1', alwaysShow: true, auth: ['menu:1'] },
                 children: [
                     {
                         path: '/menu/menu1/menu1-1',
                         element: lazyLoad(() => import('@/pages/menu/menu1/menu1-1.tsx')),
-                        meta: { name: '菜单1-1', auth: ['admin'] }
+                        meta: { name: '菜单1-1', auth: ['menu:1:1'] }
                     },
                     {
                         path: '/menu/menu1/menu1-2',

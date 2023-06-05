@@ -1,1 +1,1 @@
-type userAuth = 'admin' | 'test' | 'user'
+type userAuth = string

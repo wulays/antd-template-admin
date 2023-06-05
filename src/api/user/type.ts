@@ -16,3 +16,12 @@ interface userLoginResType {
     pd?: string
     roles: userAuth[]
 }
+
+// 用户权限请求类型
+interface userAuthReqType {
+    token?: string
+}
+// 用户权限响应
+interface userAuthResType {
+    auth: string[]
+}

@@ -28,7 +28,7 @@ export default function SideBar(props: Props) {
     function filterMenuItem(list: RouteItem[]): RouteItem[] {
         return list.filter((_) => {
             // 如果不隐藏菜单栏同时有权限
-            return !_?.meta?.hidden && (!_.meta?.auth || userStore.roles.some((role) => _.meta?.auth?.includes(role)))
+            return !_?.meta?.hidden && (!_.meta?.auth || userStore.auth.some((role) => _.meta?.auth?.includes(role)))
         })
     }
     // 路由生成菜单

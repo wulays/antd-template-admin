@@ -1,5 +1,6 @@
 import axios from 'axios'
-import { message } from 'antd'
+import { message } from '@/components/EscapeAntd'
+import useUserStore from '@/store/modules/user.ts'
 
 const request = axios.create({
     baseURL: import.meta.env.VITE_BASE_URL,
@@ -8,6 +9,11 @@ const request = axios.create({
 
 request.interceptors.request.use(
     (config) => {
+        const { token } = useUserStore.getState()
+        if (token) {
+            config.headers['token'] = token
+        }
+
         return config
     },
     (error) => {

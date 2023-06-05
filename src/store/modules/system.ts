@@ -66,7 +66,10 @@ const useSystemStore = create<IStore>()(
                 name: 'sysSeting',
                 storage: createJSONStorage(() => localStorage)
             }
-        )
+        ),
+        {
+            name: 'sysSeting'
+        }
     )
 )
 

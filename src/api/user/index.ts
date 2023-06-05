@@ -7,3 +7,11 @@ export function login(data: userLoginReqType) {
         data
     })
 }
+
+export function getAuth(params?: userAuthReqType) {
+    return request<any, { data: userAuthResType }>({
+        url: '/api/user/auth',
+        method: 'get',
+        params
+    })
+}
