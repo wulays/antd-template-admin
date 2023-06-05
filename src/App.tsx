@@ -5,9 +5,10 @@ import { FC, useEffect } from 'react'
 import useSystemStore from '@/store/modules/system.ts'
 import { App as AntdApp, ConfigProvider } from 'antd'
 import EscapeAntd from '@/components/EscapeAntd.tsx'
+import LoadPage from '@/components/LoadPage'
 
 const App: FC = () => {
-    const { setWidth } = useSystemStore()
+    const { setWidth, gbLoadPage } = useSystemStore()
 
     useEffect(() => {
         setWidth(document.documentElement.clientWidth)
@@ -26,6 +27,7 @@ const App: FC = () => {
         >
             <AntdApp>
                 <EscapeAntd />
+                {gbLoadPage && <LoadPage />}
                 <RouterProvider router={router} />
             </AntdApp>
         </ConfigProvider>

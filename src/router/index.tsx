@@ -6,7 +6,7 @@ import Guard from '@/router/Guard.tsx'
 
 function lazyLoad<T extends () => Promise<{ default: React.ComponentType }>>(src: T) {
     return (
-        <Suspense fallback={<LoadPage />}>
+        <Suspense fallback={<LoadPage progress />}>
             <Guard>{createElement(lazy(src))}</Guard>
         </Suspense>
     )

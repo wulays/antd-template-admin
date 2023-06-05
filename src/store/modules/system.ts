@@ -10,6 +10,8 @@ interface IStore {
     width: number
     hasHeader: boolean
     showHeader: boolean
+    gbLoadPage: boolean
+    changeLoadPage: () => void
     tagView: TagViewType[]
     hasTagView: boolean
     setWidth: (width: number) => void
@@ -27,6 +29,7 @@ const useSystemStore = create<IStore>()(
                 hasHeader: true,
                 showHeader: true,
                 collapsMenu: false,
+                gbLoadPage: false,
                 tagView: [],
                 hasTagView: true,
 
@@ -60,7 +63,8 @@ const useSystemStore = create<IStore>()(
                             }
                         }
                         return {}
-                    })
+                    }),
+                changeLoadPage: () => set((state) => ({ gbLoadPage: !state.gbLoadPage }))
             }),
             {
                 name: 'sysSeting',

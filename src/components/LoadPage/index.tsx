@@ -4,11 +4,17 @@ import NProgress from 'nprogress'
 import 'nprogress/nprogress.css'
 import { useEffect } from 'react'
 
-export default function LoadPage() {
+interface Props {
+    progress?: boolean
+}
+
+export default function LoadPage(props: Props) {
     useEffect(() => {
-        NProgress.start()
-        return () => {
-            NProgress.done()
+        if (props.progress) {
+            NProgress.start()
+            return () => {
+                NProgress.done()
+            }
         }
     }, [])
 

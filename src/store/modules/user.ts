@@ -30,6 +30,7 @@ const useUserStore = create<Store>()(
         persist(
             (set) => {
                 const { errorMessage } = useMessage()
+                const systemStore = useSystemStore.getState()
 
                 return {
                     ...initState(),
@@ -37,6 +38,7 @@ const useUserStore = create<Store>()(
                     setInfo: (info) => set(() => info),
                     login: async (params) => {
                         try {
+                            systemStore.changeLoadPage()
                             const { data } = await login(params)
                             const {
                                 data: { auth }
@@ -45,6 +47,7 @@ const useUserStore = create<Store>()(
                             if (params.remember) {
                                 data.pd = atob(params.password)
                             }
+                            systemStore.changeLoadPage()
                             set(() => ({ ...data, auth }))
                             notification.success({
                                 message: `欢迎回来 ${params.username}！`,
@@ -52,6 +55,7 @@ const useUserStore = create<Store>()(
                             })
                             return data
                         } catch (e) {
+                            systemStore.changeLoadPage()
                             errorMessage(e)
                             return Promise.reject(e)
                         }
@@ -65,12 +69,15 @@ const useUserStore = create<Store>()(
                     },
                     loadAuth: async () => {
                         try {
+                            systemStore.changeLoadPage()
                             const {
                                 data: { auth }
                             } = await getAuth()
+                            systemStore.changeLoadPage()
                             set(() => ({ auth }))
                             return auth
                         } catch (e) {
+                            systemStore.changeLoadPage()
                             errorMessage(e)
                             return Promise.reject(e)
                         }

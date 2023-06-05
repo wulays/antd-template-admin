@@ -1,4 +1,6 @@
 @import "@/styles/variable";
+@import "@/styles/media";
+
 
 .container{
     width: 100vw;
@@ -26,6 +28,32 @@
             font-size: 14px;
             margin: 28px 0;
             width: 280px;
+        }
+    }
+}
+
+@include responsive($width-medium){
+    .container{
+        flex-direction: column;
+        justify-content: flex-start;
+
+        img{
+            margin-top: 50px;
+            height: 40%;
+        }
+        .content{
+            h4{
+                font-size: 28px;
+                color: $colorPrimary;
+            }
+            > span{
+                margin: 28px 0;
+            }
+            p{
+                color: #999;
+                font-size: 12px;
+                margin: 18px 0;
+            }
         }
     }
 }
