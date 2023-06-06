@@ -2,6 +2,8 @@ import type { ReactNode } from 'react'
 import { matchRoutes, useLocation, Navigate } from 'react-router-dom'
 import useUserStore from '@/store/modules/user.ts'
 import routes, { RouteItem } from '@/router'
+import { useEffect } from 'react'
+import useSystemStore from '@/store/modules/system.ts'
 
 interface Props {
     children: ReactNode
@@ -12,6 +14,14 @@ export default function Guard(props: Props) {
     // 当前匹配的路由列表
     const routeList = (matchRoutes(routes.routes, location) || []).map((_) => _.route) as RouteItem[]
     const route = routeList.find((_) => _.path === location.pathname)
+
+    const systemStore = useSystemStore()
+
+    useEffect(() => {
+        if (systemStore.enableDynamicTitle) {
+            document.title = route ? `${systemStore.appTitle} - ${route.meta?.name}` : systemStore.appTitle
+        }
+    }, [route, systemStore.appTitle, systemStore.enableDynamicTitle])
 
     const userStore = useUserStore()
 

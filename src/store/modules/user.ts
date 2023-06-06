@@ -4,6 +4,8 @@ import { getAuth, login } from '@/api/user'
 import useMessage from '@/hooks/uesMessage.tsx'
 import { devtools, persist, createJSONStorage } from 'zustand/middleware'
 import useSystemStore from '@/store/modules/system.ts'
+import { StateStorage } from '@/utils/auth.ts'
+import { getHelloTime } from '@/utils'
 
 interface Store extends userLoginResType, userAuthResType {
     setName: (username: string) => void
@@ -38,24 +40,19 @@ const useUserStore = create<Store>()(
                     setInfo: (info) => set(() => info),
                     login: async (params) => {
                         try {
-                            systemStore.changeLoadPage(true)
                             const { data } = await login(params)
-                            const {
-                                data: { auth }
-                            } = await getAuth({ token: data.token })
                             // 如果记住密码
                             if (params.remember) {
                                 data.pd = atob(params.password)
                             }
-                            systemStore.changeLoadPage(false)
-                            set(() => ({ ...data, auth }))
+                            set(() => data)
                             notification.success({
-                                message: `欢迎回来 ${params.username}！`,
+                                message: `${getHelloTime()}好！`,
+                                description: `欢迎回来 ${params.username}`,
                                 duration: 2
                             })
                             return data
                         } catch (e) {
-                            systemStore.changeLoadPage(false)
                             errorMessage(e)
                             return Promise.reject(e)
                         }
@@ -85,12 +82,12 @@ const useUserStore = create<Store>()(
                 }
             },
             {
-                name: 'userInfo',
-                storage: createJSONStorage(() => localStorage)
+                name: window.btoa('userState'),
+                storage: createJSONStorage(() => StateStorage)
             }
         ),
         {
-            name: 'userInfo'
+            name: 'userState'
         }
     )
 )

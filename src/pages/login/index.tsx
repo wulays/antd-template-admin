@@ -5,16 +5,22 @@ import { Form, Input, Checkbox, Button } from 'antd'
 import { useNavigate } from 'react-router-dom'
 import useUserStore from '@/store/modules/user.ts'
 import { motion } from 'framer-motion'
+import { useState } from 'react'
 
 export default function Login() {
     const navigate = useNavigate()
     const userStore = useUserStore()
 
+    const [loading, setLoading] = useState(false)
+
     async function handleLogin(params: userLoginReqType) {
         try {
+            setLoading(true)
             await userStore.login(params)
+            setLoading(false)
             navigate('/dashboard')
         } catch (e) {
+            setLoading(false)
             console.log(e)
         }
     }
@@ -54,12 +60,12 @@ export default function Login() {
                     </Form.Item>
 
                     <Form.Item>
-                        <Button type="primary" htmlType="submit" block>
+                        <Button type="primary" loading={loading} htmlType="submit" block>
                             登录
                         </Button>
                     </Form.Item>
                     <Form.Item>
-                        <Button type="text" block>
+                        <Button type="text" disabled={loading} block>
                             注册
                         </Button>
                     </Form.Item>

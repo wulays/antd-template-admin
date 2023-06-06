@@ -15,7 +15,6 @@
 
 .main {
     height: 100%;
-    overflow: hidden;
     transition: width .3s;
     width: calc(100% - 240px);
 }
@@ -24,6 +23,13 @@
     min-height: calc(100% - 48px);
     overflow: hidden;
     position: relative;
+}
+
+.nav-bar {
+    top: 0;
+    z-index: 99;
+    position: sticky;
+    background-color: #fff;
 }
 
 .side-bar {
@@ -38,19 +44,13 @@
     border-right: 1px solid #e8e8e8;
     box-shadow: 10px 0 10px -10px rgb(0 0 0 / 12%);
 
+    .logo {
+        padding: 14px;
+        white-space: nowrap;
+    }
+
     :global .ant-menu.ant-menu-root {
         border-right: none;
-    }
-}
-.logo{
-    padding: 5px 10px 10px;
-    display: flex;
-    align-items: center;
-    span {
-        margin-left: 14px;
-    }
-    img {
-        height: 42px;
     }
 }
 
@@ -58,6 +58,15 @@
     width: 81px;
     + .main {
         width: calc(100% - 81px);
+    }
+    .logo {
+        padding: 20px;
+        img {
+            height: 28px;
+        }
+        > span {
+            display: none;
+        }
     }
 }
 

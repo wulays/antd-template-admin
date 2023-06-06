@@ -1,5 +1,6 @@
 import { create } from 'zustand'
 import { devtools } from 'zustand/middleware'
+import globalSettings from '@/settings.ts'
 
 interface TagViewType {
     path: string
@@ -8,9 +9,13 @@ interface TagViewType {
 
 interface IStore {
     width: number
+    appTitle: string
     hasHeader: boolean
+    hasLogo: boolean
     showHeader: boolean
     gbLoadPage: boolean
+    headerFixed: boolean
+    enableDynamicTitle: boolean
     changeLoadPage: (status?: boolean) => void
     tagView: TagViewType[]
     hasTagView: boolean
@@ -25,12 +30,16 @@ const useSystemStore = create<IStore>()(
     devtools(
         (set) => ({
             width: 0,
-            hasHeader: true,
             showHeader: true,
             collapsMenu: false,
             gbLoadPage: false,
             tagView: [],
-            hasTagView: true,
+            appTitle: globalSettings.app.appTitle,
+            hasLogo: globalSettings.header.hasLogo,
+            headerFixed: globalSettings.header.fixed,
+            hasHeader: globalSettings.header.hasHeader,
+            hasTagView: globalSettings.header.hasTagView,
+            enableDynamicTitle: globalSettings.app.enableDynamicTitle,
 
             setWidth: (width) =>
                 set(() => {

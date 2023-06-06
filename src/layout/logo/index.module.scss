@@ -1,0 +1,12 @@
+.logo{
+    padding: 5px 10px 10px;
+    display: flex;
+    align-items: center;
+    transition: all .3s;
+    span {
+        margin-left: 14px;
+    }
+    img {
+        height: 42px;
+    }
+}

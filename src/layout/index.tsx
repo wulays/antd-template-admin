@@ -10,7 +10,7 @@ import { Drawer } from 'antd'
 import { matchRoutes, Outlet, useLocation, useNavigate } from 'react-router-dom'
 import routes from '@/router'
 import type { RouteItem } from '@/router'
-import logo from '@/assets/images/logo.png'
+import Logo from './logo'
 
 import { useAnimate } from 'framer-motion'
 import { useEffect } from 'react'
@@ -38,7 +38,7 @@ export default function Layout() {
     useEffect(() => {
         const timer = setTimeout(() => {
             userStore.loadAuth()
-        }, 100)
+        })
         return () => {
             clearTimeout(timer)
         }
@@ -59,12 +59,15 @@ export default function Layout() {
             <div className={styles.container}>
                 <div className={`${styles['side-bar']} ${systemStore.collapsMenu ? styles.collapsed : ''}`}>
                     {systemStore.showHeader ? (
-                        <SideBar
-                            collapsMenu={systemStore.collapsMenu}
-                            authMenu={routes.routes}
-                            defaultOpenKeys={routeList.slice(0, -1).map((_) => _.pathname)}
-                            route={route}
-                        />
+                        <>
+                            {!systemStore.hasHeader && systemStore.hasLogo && <Logo className={styles.logo} />}
+                            <SideBar
+                                collapsMenu={systemStore.collapsMenu}
+                                authMenu={routes.routes}
+                                defaultOpenKeys={routeList.slice(0, -1).map((_) => _.pathname)}
+                                route={route}
+                            />
+                        </>
                     ) : (
                         <Drawer
                             placement="left"
@@ -74,10 +77,7 @@ export default function Layout() {
                             open={!systemStore.collapsMenu}
                             onClose={systemStore.toggleCollapsMenu}
                         >
-                            <div className={styles.logo}>
-                                <img src={logo} alt="" />
-                                <span>Antd Admin Template</span>
-                            </div>
+                            {systemStore.hasLogo && <Logo className={styles.logo} />}
                             <SideBar
                                 collapsMenu={false}
                                 authMenu={routes.routes}
@@ -89,8 +89,10 @@ export default function Layout() {
                     )}
                 </div>
                 <div className={styles.main}>
-                    <TopBar list={breadcrumbList} />
-                    <Tags route={route} />
+                    <div className={systemStore.headerFixed ? styles['nav-bar'] : ''}>
+                        <TopBar list={breadcrumbList} />
+                        {systemStore.hasTagView && <Tags route={route} />}
+                    </div>
                     <div ref={scope} className={styles.content}>
                         <Outlet />
                     </div>
