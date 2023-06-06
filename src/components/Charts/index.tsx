@@ -23,7 +23,7 @@ export default function Chart(props: Props) {
                 chart?.dispose()
             }
         }
-    }, [props.options, systemStore.collapsMenu])
+    }, [props.options])
 
     useEffect(() => {
         const timer = setTimeout(() => {
@@ -32,7 +32,7 @@ export default function Chart(props: Props) {
         return () => {
             clearTimeout(timer)
         }
-    }, [chart, systemStore.width])
+    }, [chart, systemStore.width, systemStore.collapsMenu])
 
     return <div ref={chartRef} style={{ height: props.height, width: '100%' }}></div>
 }

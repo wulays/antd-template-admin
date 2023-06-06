@@ -77,7 +77,7 @@ const routes: RouteItem[] = [
     {
         path: '/menu',
         element: Layout,
-        meta: { name: '嵌套路由', icon: 'ant-design:appstore-add-outlined', auth: ['menu'] },
+        meta: { name: '菜单管理', icon: 'ant-design:appstore-add-outlined', auth: ['menu'] },
         children: [
             {
                 path: '/menu/menu1',
@@ -100,6 +100,18 @@ const routes: RouteItem[] = [
                 path: '/menu/menu2',
                 element: lazyLoad(() => import('@/pages/menu/menu2')),
                 meta: { name: '菜单2' }
+            }
+        ]
+    },
+    {
+        path: '/',
+        element: Layout,
+        meta: { name: '富文本', icon: 'ant-design:edit-filled', auth: ['menu'] },
+        children: [
+            {
+                path: '/editor',
+                element: lazyLoad(() => import('@/pages/editor')),
+                meta: { name: '富文本', icon: 'ant-design:edit-filled' }
             }
         ]
     },

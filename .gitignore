@@ -13,7 +13,7 @@ dist-test
 dist-ssr
 *.local
 
-# Editor directories and files
+# TinyMCE directories and files
 .vscode/*
 !.vscode/extensions.json
 .idea
