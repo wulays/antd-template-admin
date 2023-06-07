@@ -25,7 +25,7 @@ export default forwardRef<EditorHandle, Props>(function (props, ref) {
     )
 
     const defaultSetting: EditorConfig = {
-        language_url: 'tinymce/langs/zh-Hans.js',
+        language_url: `${import.meta.env.BASE_URL}tinymce/langs/zh-Hans.js`,
         language: 'zh-Hans',
         min_height: 300,
         toolbar:
@@ -39,7 +39,7 @@ export default forwardRef<EditorHandle, Props>(function (props, ref) {
     return (
         <>
             <Editor
-                tinymceScriptSrc={'/tinymce/tinymce.min.js'}
+                tinymceScriptSrc={`${import.meta.env.BASE_URL}tinymce/tinymce.min.js`}
                 onInit={(_, editor) => (editorRef.current = editor)}
                 init={{ ...defaultSetting, ...props?.config }}
             />

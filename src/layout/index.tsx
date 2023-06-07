@@ -15,6 +15,7 @@ import Logo from './logo'
 import { useAnimate } from 'framer-motion'
 import { useEffect } from 'react'
 import useUserStore from '@/store/modules/user.ts'
+import classNames from 'classnames'
 
 export default function Layout() {
     const systemStore = useSystemStore()
@@ -56,7 +57,7 @@ export default function Layout() {
     return (
         <div className={styles.warpper}>
             {systemStore.hasHeader && systemStore.showHeader && <Header />}
-            <div className={styles.container}>
+            <div className={classNames([styles.container, { [styles['has-header']]: systemStore.hasHeader }])}>
                 <div className={`${styles['side-bar']} ${systemStore.collapsMenu ? styles.collapsed : ''}`}>
                     {systemStore.showHeader ? (
                         <>
