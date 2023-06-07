@@ -8,7 +8,6 @@ import EscapeAntd from '@/components/EscapeAntd.tsx'
 import LoadPage from '@/components/LoadPage'
 
 const App: FC = () => {
-    console.log(import.meta.env)
     const { setWidth, gbLoadPage } = useSystemStore()
 
     useEffect(() => {

@@ -11,6 +11,8 @@ interface Props {
 
 export interface EditorHandle {
     getContent: () => string | undefined
+    setContent: (html: string) => void
+    getEditor: () => TinyMCEEditor | null
 }
 
 export default forwardRef<EditorHandle, Props>(function (props, ref) {
@@ -19,7 +21,9 @@ export default forwardRef<EditorHandle, Props>(function (props, ref) {
     useImperativeHandle(
         ref,
         () => ({
-            getContent: () => editorRef.current?.getContent()
+            getContent: () => editorRef.current?.getContent(),
+            setContent: (html) => editorRef.current?.setContent(html),
+            getEditor: () => editorRef.current
         }),
         [editorRef]
     )

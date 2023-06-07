@@ -19,7 +19,8 @@ export default function Guard(props: Props) {
 
     useEffect(() => {
         if (systemStore.enableDynamicTitle) {
-            document.title = route ? `${systemStore.appTitle} - ${route.meta?.name}` : systemStore.appTitle
+            document.title =
+                route && route.meta?.name ? `${systemStore.appTitle} - ${route.meta?.name}` : systemStore.appTitle
         }
     }, [route, systemStore.appTitle, systemStore.enableDynamicTitle])
 
@@ -34,7 +35,8 @@ export default function Guard(props: Props) {
         if (
             !routeList.every((route) => !route.meta?.auth || userStore.auth.some((_) => route.meta?.auth?.includes(_)))
         ) {
-            return <Navigate to="/404" replace />
+            setTimeout(() => systemStore.removeTagView(location.pathname))
+            return <Navigate to="/401" replace />
         }
         return <>{props.children}</>
     } else {

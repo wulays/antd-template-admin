@@ -13,7 +13,8 @@ function lazyLoad<T extends () => Promise<{ default: React.ComponentType }>>(src
 }
 
 const Layout = lazyLoad(() => import('@/layout'))
-const Page404 = lazyLoad(() => import('@/pages/404'))
+const Page401 = lazyLoad(() => import('../pages/error/401.tsx'))
+const Page404 = lazyLoad(() => import('../pages/error/404.tsx'))
 
 export declare interface RouteItem extends Omit<RouteObject, 'children'> {
     meta?: {
@@ -117,11 +118,16 @@ const routes: RouteItem[] = [
     },
     {
         path: 'https://github.com/wulays',
-        meta: { name: '外部连接', icon: 'ant-design:github-outlined' }
+        meta: { name: '外链', icon: 'ant-design:select-outlined' }
     },
     {
         path: '/login',
         element: lazyLoad(() => import('@/pages/login')),
+        meta: { hidden: true, white: true }
+    },
+    {
+        path: '/401',
+        element: Page401,
         meta: { hidden: true, white: true }
     },
     {
