@@ -47,6 +47,9 @@ dependencies:
   tinymce:
     specifier: ^6.4.2
     version: 6.4.2
+  vditor:
+    specifier: ^3.9.3
+    version: 3.9.3
   vite-plugin-compression:
     specifier: ^0.5.1
     version: 0.5.1(vite@4.3.2)
@@ -1987,6 +1990,10 @@ packages:
   /delayed-stream@1.0.0:
     resolution: {integrity: sha512-ZySD7Nf91aLB0RxL4KGrKHBXl7Eds1DAmEdcoVawXnLD7SDhpNgtuII2aAkg7a7QS41jxPSZ17p4VdGnMHk3MQ==}
     engines: {node: '>=0.4.0'}
+    dev: false
+
+  /diff-match-patch@1.0.5:
+    resolution: {integrity: sha512-IayShXAgj/QMXgB0IWmKx+rOPuGMhqm5w6jvFxmVenXKIzRqTAAsbBPT3kWQeGANj3jGgvcvv4yK6SxqYmikgw==}
     dev: false
 
   /diff@4.0.2:
@@ -5016,6 +5023,12 @@ packages:
   /vary@1.1.2:
     resolution: {integrity: sha512-BNGbWLfd0eUPabhkXUVm0j8uuvREyTh5ovRa/dyow/BqAbZJyC+5fU+IzQOzmAKzYqYRAISoRhdQr3eIZ/PXqg==}
     engines: {node: '>= 0.8'}
+    dev: false
+
+  /vditor@3.9.3:
+    resolution: {integrity: sha512-w3ZSa8SQaZNFEO7XeHsJEW6NoXH4FgqU1BHVYfQ2tGk1y9rQMVWYJOXegO25QhgnAIF4qtm/AoylUg4b5mW7cg==}
+    dependencies:
+      diff-match-patch: 1.0.5
     dev: false
 
   /vite-plugin-compression@0.5.1(vite@4.3.2):

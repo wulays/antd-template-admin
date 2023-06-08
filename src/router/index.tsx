@@ -117,6 +117,18 @@ const routes: RouteItem[] = [
         ]
     },
     {
+        path: '/',
+        element: Layout,
+        meta: { name: 'Markdown', icon: 'ant-design:edit-filled', auth: ['menu'] },
+        children: [
+            {
+                path: '/markdown',
+                element: lazyLoad(() => import('@/pages/markdown')),
+                meta: { name: 'Markdown', icon: 'ant-design:read-filled' }
+            }
+        ]
+    },
+    {
         path: 'https://github.com/wulays',
         meta: { name: '外链', icon: 'ant-design:select-outlined' }
     },
