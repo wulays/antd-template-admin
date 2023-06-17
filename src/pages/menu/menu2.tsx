@@ -1,3 +1,3 @@
 export default function Menu2() {
-    return <div>menu-2</div>
+    return <div style={{ backgroundColor: '#ffefef', padding: '30px' }}>menu-2</div>
 }

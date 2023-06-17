@@ -5,6 +5,7 @@ import globalSettings from '@/settings.ts'
 interface TagViewType {
     path: string
     title: string
+    notDelTag?: boolean
 }
 
 interface IStore {

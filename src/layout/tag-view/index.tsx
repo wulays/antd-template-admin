@@ -17,7 +17,11 @@ export default function Tags(props: Props) {
 
     useEffect(() => {
         if (props.route.meta?.name) {
-            systemStore.setTagView({ path: location.pathname, title: props.route.meta?.name })
+            systemStore.setTagView({
+                path: location.pathname,
+                title: props.route.meta?.name,
+                notDelTag: props.route.meta.notDelTag
+            })
         }
     }, [location.pathname])
 
@@ -48,13 +52,15 @@ export default function Tags(props: Props) {
                     onClick={() => handleGoToPage(tag.path)}
                 >
                     {tag.title}
-                    <SvgIcon
-                        name="ant-design:close-outlined"
-                        onClick={(ev) => {
-                            ev.stopPropagation()
-                            handleRemoveTag(tag.path)
-                        }}
-                    />
+                    {!tag.notDelTag && (
+                        <SvgIcon
+                            name="ant-design:close-outlined"
+                            onClick={(ev) => {
+                                ev.stopPropagation()
+                                handleRemoveTag(tag.path)
+                            }}
+                        />
+                    )}
                 </span>
             ))}
         </div>

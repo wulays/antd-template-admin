@@ -25,6 +25,7 @@ export declare interface RouteItem extends Omit<RouteObject, 'children'> {
         alwaysShow?: boolean
         white?: boolean
         auth?: userAuth[]
+        notDelTag?: boolean
     }
     children?: RouteItem[]
 }
@@ -36,7 +37,7 @@ const routes: RouteItem[] = [
         children: [
             {
                 path: '/dashboard',
-                meta: { name: '主页', icon: 'ant-design:desktop-outlined' },
+                meta: { name: '主页', icon: 'ant-design:desktop-outlined', notDelTag: true },
                 element: lazyLoad(() => import('@/pages/dashboard'))
             }
         ]
