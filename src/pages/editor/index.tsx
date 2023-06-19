@@ -1,15 +1,15 @@
 import Editor from '@/components/TinyMCE'
 import type { EditorHandle } from '@/components/TinyMCE'
-import { useCallback, useRef } from 'react'
+import { useRef } from 'react'
 import { Button, Alert } from 'antd'
 import styles from './index.module.scss'
 
 export default function EditorPage() {
     const editorRef = useRef<EditorHandle>(null)
 
-    const handleClickLog = useCallback(() => {
+    const handleClickLog = () => {
         alert(editorRef.current?.getContent())
-    }, [editorRef])
+    }
 
     return (
         <div className={styles.container}>

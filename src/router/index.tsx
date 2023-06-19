@@ -108,7 +108,28 @@ const routes: RouteItem[] = [
     {
         path: '/',
         element: Layout,
-        meta: { name: '富文本', icon: 'ant-design:edit-filled', auth: ['menu'] },
+        children: [
+            {
+                path: '/form',
+                element: lazyLoad(() => import('@/pages/form')),
+                meta: { name: '表单', icon: 'ant-design:file-add-filled' }
+            }
+        ]
+    },
+    {
+        path: '/',
+        element: Layout,
+        children: [
+            {
+                path: '/table',
+                element: lazyLoad(() => import('@/pages/table')),
+                meta: { name: '表格', icon: 'ant-design:insert-row-above-outlined' }
+            }
+        ]
+    },
+    {
+        path: '/',
+        element: Layout,
         children: [
             {
                 path: '/editor',
@@ -120,7 +141,6 @@ const routes: RouteItem[] = [
     {
         path: '/',
         element: Layout,
-        meta: { name: 'Markdown', icon: 'ant-design:edit-filled', auth: ['menu'] },
         children: [
             {
                 path: '/markdown',

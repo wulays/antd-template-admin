@@ -4,7 +4,7 @@ import Chart from '@/components/Charts'
 import { Table, Tag } from 'antd'
 import { barOption, FunnelOption, LineOption, PieOption, barOption2 } from './chart-options.ts'
 import { getOrderList } from '@/api/order'
-import { useCallback, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import cardBg from '@/assets/images/dashboard/cover.png'
 import { motion } from 'framer-motion'
 
@@ -69,7 +69,7 @@ export default function Home() {
     const [orderList, setOrderList] = useState<orderResType[]>([])
 
     const [tableLoad, setTableLoad] = useState(false)
-    const loadOrderList = useCallback(async () => {
+    const loadOrderList = async () => {
         try {
             setTableLoad(true)
             const { data } = await getOrderList({ page: 1, list: 10 })
@@ -79,7 +79,7 @@ export default function Home() {
             setTableLoad(false)
             console.log(e)
         }
-    }, [])
+    }
 
     useEffect(() => {
         const timer = setTimeout(() => {

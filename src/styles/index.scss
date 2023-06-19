@@ -1,0 +1,16 @@
+.search-list{
+    padding: 10px 0;
+    display: flex;
+    flex-wrap: wrap;
+    list-style: none;
+    > li {
+        display: flex;
+        align-items: center;
+        margin: 10px 24px;
+        margin-left: 0;
+        > span{
+            white-space: nowrap;
+            margin-right: 10px;
+        }
+    }
+}

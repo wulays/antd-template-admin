@@ -1,15 +1,14 @@
 import { Radio } from 'antd'
 import type { RadioChangeEvent } from 'antd'
 import useUserStore from '@/store/modules/user.ts'
-import { useCallback } from 'react'
 
 export default function Auth() {
     const userStore = useUserStore()
 
-    const handleAuthChange = useCallback((ev: RadioChangeEvent) => {
+    const handleAuthChange = (ev: RadioChangeEvent) => {
         useUserStore.setState(() => ({ token: ev.target.value }))
         userStore.loadAuth()
-    }, [])
+    }
 
     return (
         <div>
