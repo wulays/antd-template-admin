@@ -3,8 +3,7 @@ import SvgIcon from '@/components/SvgIcon'
 import Chart from '@/components/Charts'
 import { Table, Tag } from 'antd'
 import { barOption, FunnelOption, LineOption, PieOption, barOption2 } from './chart-options.ts'
-import { getOrderList } from '@/api/order'
-import { useEffect, useState } from 'react'
+import { useOrderList } from '@/api/order'
 import cardBg from '@/assets/images/dashboard/cover.png'
 import { motion } from 'framer-motion'
 
@@ -66,29 +65,7 @@ export default function Home() {
         }
     ]
 
-    const [orderList, setOrderList] = useState<orderResType[]>([])
-
-    const [tableLoad, setTableLoad] = useState(false)
-    const loadOrderList = async () => {
-        try {
-            setTableLoad(true)
-            const { data } = await getOrderList({ page: 1, list: 10 })
-            setTableLoad(false)
-            setOrderList(data)
-        } catch (e) {
-            setTableLoad(false)
-            console.log(e)
-        }
-    }
-
-    useEffect(() => {
-        const timer = setTimeout(() => {
-            loadOrderList()
-        })
-        return () => {
-            clearTimeout(timer)
-        }
-    }, [])
+    const { data, isLoading: tableLoad } = useOrderList({ page: 1, list: 10 })
 
     return (
         <div className={styles.container}>
@@ -121,7 +98,13 @@ export default function Home() {
             <div className={styles.cardChart}>
                 <div className={styles.table}>
                     <div>
-                        <Table dataSource={orderList} columns={tableCol} rowKey="id" size="small" loading={tableLoad} />
+                        <Table
+                            dataSource={data?.data}
+                            columns={tableCol}
+                            rowKey="id"
+                            size="small"
+                            loading={tableLoad}
+                        />
                     </div>
                 </div>
                 <div className={styles.chart}>

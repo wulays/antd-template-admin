@@ -1,7 +1,7 @@
-import request from '@/utils/request.ts'
+import useRequest from '@/hooks/useRequest.ts'
 
-export function getOrderList(params: orderReqType) {
-    return request<any, { data: orderResType[] }>({
+export function useOrderList(params: orderReqType) {
+    return useRequest<{ data: orderResType[] }>({
         url: '/api/order/list',
         method: 'get',
         params
