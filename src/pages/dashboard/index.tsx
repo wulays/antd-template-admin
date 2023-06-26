@@ -6,6 +6,7 @@ import { barOption, FunnelOption, LineOption, PieOption, barOption2 } from './ch
 import { useOrderList } from '@/api/order'
 import cardBg from '@/assets/images/dashboard/cover.png'
 import { motion } from 'framer-motion'
+import { useState } from 'react'
 
 export default function Home() {
     const panelList = [
@@ -65,7 +66,12 @@ export default function Home() {
         }
     ]
 
-    const { data, isLoading: tableLoad } = useOrderList({ page: 1, list: 10 })
+    const [pageSize, setPageSize] = useState({
+        page: 1,
+        list: 10
+    })
+
+    const { data, isValidating: tableLoad } = useOrderList(pageSize)
 
     return (
         <div className={styles.container}>
@@ -104,6 +110,10 @@ export default function Home() {
                             rowKey="id"
                             size="small"
                             loading={tableLoad}
+                            pagination={{
+                                total: data?.total,
+                                onChange: (size) => setPageSize((state) => ({ ...state, page: size }))
+                            }}
                         />
                     </div>
                 </div>

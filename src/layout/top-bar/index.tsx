@@ -1,7 +1,7 @@
 import styles from './index.module.scss'
 import SvgIcon from '@/components/SvgIcon'
 import useSystemStore from '@/store/modules/system.ts'
-import { Breadcrumb, Button } from 'antd'
+import { Breadcrumb, Button, theme } from 'antd'
 import Tools from '@/layout/tools'
 
 interface Props {
@@ -11,8 +11,10 @@ interface Props {
 export default function TopBar(props: Props) {
     const systemStore = useSystemStore()
 
+    const { token: tColor } = theme.useToken()
+
     return (
-        <div className={styles.warp}>
+        <div className={styles.warp} style={{ borderColor: tColor.colorBorder }}>
             <div className={styles.breadcrumb}>
                 <Button type="link" onClick={systemStore.toggleCollapsMenu} style={{ fontSize: 18, border: 'none' }}>
                     {systemStore.collapsMenu ? (

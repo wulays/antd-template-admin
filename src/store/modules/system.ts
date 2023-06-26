@@ -1,6 +1,7 @@
 import { create } from 'zustand'
 import { devtools } from 'zustand/middleware'
 import globalSettings from '@/settings.ts'
+import type { ThemeConfig } from 'antd'
 
 interface TagViewType {
     path: string
@@ -9,6 +10,7 @@ interface TagViewType {
 }
 
 interface IStore {
+    themeOption: ThemeConfig['token']
     width: number
     appTitle: string
     hasHeader: boolean
@@ -30,6 +32,9 @@ interface IStore {
 const useSystemStore = create<IStore>()(
     devtools(
         (set) => ({
+            themeOption: {
+                colorPrimary: '#00a7e6'
+            },
             width: 0,
             showHeader: true,
             collapsMenu: false,

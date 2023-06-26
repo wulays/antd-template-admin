@@ -1,9 +1,9 @@
 import * as Mock from 'mockjs'
 import type { MockMethod } from 'vite-plugin-mock'
 
-function orderList(query) {
+function orderList(list) {
     return Mock.mock({
-        [`data|${query.list}`]: [
+        [`data|${list}`]: [
             {
                 id: '@guid()',
                 name: '@cname()',
@@ -20,10 +20,15 @@ export default [
         method: 'get',
         timeout: 1000,
         response: ({ query }) => {
-            const data = orderList(query).data
+            const total = 42
+            let num = total - query.page * query.list
+            num = num < 0 ? num + 10 : 10
+
+            console.log(query.page)
+            const data = orderList(num).data
             return {
                 code: 200,
-                count: data.length,
+                total,
                 data
             }
         }

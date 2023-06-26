@@ -1,4 +1,4 @@
-import logo from '@/assets/images/logo.png'
+import logo from '@/assets/images/logo-removebg.png'
 import styles from './index.module.scss'
 import classNames from 'classnames'
 import useSystemStore from '@/store/modules/system.ts'

@@ -8,7 +8,7 @@ import EscapeAntd from '@/components/EscapeAntd.tsx'
 import LoadPage from '@/components/LoadPage'
 
 const App: FC = () => {
-    const { setWidth, gbLoadPage } = useSystemStore()
+    const { setWidth, themeOption, gbLoadPage } = useSystemStore()
 
     useEffect(() => {
         setWidth(document.documentElement.clientWidth)
@@ -20,9 +20,7 @@ const App: FC = () => {
     return (
         <ConfigProvider
             theme={{
-                token: {
-                    colorPrimary: '#00a7e6'
-                }
+                token: themeOption
             }}
         >
             <AntdApp>

@@ -5,6 +5,7 @@ import { useLocation, useNavigate } from 'react-router-dom'
 import { useEffect } from 'react'
 import classNames from 'classnames'
 import SvgIcon from '@/components/SvgIcon'
+import { theme } from 'antd'
 
 interface Props {
     route: RouteItem
@@ -14,6 +15,8 @@ export default function Tags(props: Props) {
     const systemStore = useSystemStore()
     const location = useLocation()
     const navigate = useNavigate()
+
+    const { token: tColor } = theme.useToken()
 
     useEffect(() => {
         if (props.route.meta?.name) {
@@ -41,10 +44,23 @@ export default function Tags(props: Props) {
     }
 
     return (
-        <div className={styles.container}>
+        <div className={styles.container} style={{ borderColor: tColor.colorBorder }}>
             {systemStore.tagView.map((tag) => (
                 <span
                     className={classNames([styles.tag, location.pathname === tag.path ? styles.active : ''])}
+                    style={
+                        location.pathname === tag.path
+                            ? {
+                                  color: tColor.colorWhite,
+                                  backgroundColor: tColor.colorPrimaryText,
+                                  borderColor: tColor.colorBorder
+                              }
+                            : {
+                                  color: tColor.colorTextBase,
+                                  backgroundColor: tColor.colorBgBase,
+                                  borderColor: tColor.colorBorder
+                              }
+                    }
                     key={tag.path}
                     onClick={() => handleGoToPage(tag.path)}
                 >

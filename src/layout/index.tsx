@@ -6,7 +6,7 @@ import Header from './header'
 import useSystemStore from '@/store/modules/system.ts'
 import TopBar from '@/layout/top-bar'
 import Tags from '@/layout/tag-view'
-import { Drawer } from 'antd'
+import { Drawer, theme } from 'antd'
 import { matchRoutes, Outlet, useLocation, useNavigate } from 'react-router-dom'
 import routes from '@/router'
 import type { RouteItem } from '@/router'
@@ -23,9 +23,11 @@ export default function Layout() {
 
     const location = useLocation()
     const navigate = useNavigate()
+    const { token: tColor } = theme.useToken()
 
     // 当前匹配的路由列表
     const routeList = matchRoutes(routes.routes, location) || []
+
     // 当前路由
     const route = routeList?.find((_) => _.pathname === location.pathname)?.route as RouteItem
 
@@ -51,14 +53,20 @@ export default function Layout() {
             navigate(route.children[0].path || userStore.homepath || '/')
             return
         }
-        animate('div', { opacity: [0, 1] })
+        animate('div', { opacity: [0, 1], filter: ['blur(1px)', 'blur(0px)'] })
     }, [route])
 
     return (
         <div className={styles.warpper}>
             {systemStore.hasHeader && systemStore.showHeader && <Header />}
-            <div className={classNames([styles.container, { [styles['has-header']]: systemStore.hasHeader }])}>
-                <div className={`${styles['side-bar']} ${systemStore.collapsMenu ? styles.collapsed : ''}`}>
+            <div
+                className={classNames([styles.container, { [styles['has-header']]: systemStore.hasHeader }])}
+                style={{ backgroundColor: tColor.colorBgContainer }}
+            >
+                <div
+                    className={`${styles['side-bar']} ${systemStore.collapsMenu ? styles.collapsed : ''}`}
+                    style={{ backgroundColor: tColor.colorBgBase, borderColor: tColor.colorBorder }}
+                >
                     {systemStore.showHeader ? (
                         <>
                             {!systemStore.hasHeader && systemStore.hasLogo && <Logo className={styles.logo} />}
@@ -90,7 +98,10 @@ export default function Layout() {
                     )}
                 </div>
                 <div className={styles.main}>
-                    <div className={systemStore.headerFixed ? styles['nav-bar'] : ''}>
+                    <div
+                        className={systemStore.headerFixed ? styles['nav-bar'] : ''}
+                        style={{ backgroundColor: tColor.colorBgBase, borderColor: tColor.colorBorder }}
+                    >
                         <TopBar list={breadcrumbList} />
                         {systemStore.hasTagView && <Tags route={route} />}
                     </div>
