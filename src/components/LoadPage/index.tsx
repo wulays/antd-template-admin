@@ -20,7 +20,7 @@ export default function LoadPage(props: Props) {
 
     return (
         <div className={styles.warp}>
-            <Spin />
+            <Spin size="large" />
         </div>
     )
 }

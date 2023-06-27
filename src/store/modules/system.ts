@@ -39,7 +39,7 @@ const useSystemStore = create<IStore>()(
             showHeader: true,
             collapsMenu: false,
             gbLoadPage: false,
-            tagView: [],
+            tagView: [{ path: '/dashboard', title: '主页', notDelTag: true }],
             appTitle: globalSettings.app.appTitle,
             hasLogo: globalSettings.header.hasLogo,
             headerFixed: globalSettings.header.fixed,

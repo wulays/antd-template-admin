@@ -52,8 +52,8 @@ export default function Tags(props: Props) {
                         location.pathname === tag.path
                             ? {
                                   color: tColor.colorWhite,
-                                  backgroundColor: tColor.colorPrimaryText,
-                                  borderColor: tColor.colorBorder
+                                  backgroundColor: tColor.colorPrimary,
+                                  borderColor: tColor.colorPrimary
                               }
                             : {
                                   color: tColor.colorTextBase,

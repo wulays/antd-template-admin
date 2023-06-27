@@ -16,6 +16,7 @@ import { useAnimate } from 'framer-motion'
 import { useEffect } from 'react'
 import useUserStore from '@/store/modules/user.ts'
 import classNames from 'classnames'
+import { createBreadcrumb } from '@/utils/route.tsx'
 
 export default function Layout() {
     const systemStore = useSystemStore()
@@ -32,9 +33,7 @@ export default function Layout() {
     const route = routeList?.find((_) => _.pathname === location.pathname)?.route as RouteItem
 
     // 面包屑
-    const breadcrumbList = routeList.map((_) => {
-        return { title: (_.route as RouteItem).meta?.name }
-    })
+    const breadcrumbList = routeList.map((_) => createBreadcrumb(_))
 
     const [scope, animate] = useAnimate()
 

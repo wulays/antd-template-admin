@@ -3,9 +3,10 @@ import SvgIcon from '@/components/SvgIcon'
 import useSystemStore from '@/store/modules/system.ts'
 import { Breadcrumb, Button, theme } from 'antd'
 import Tools from '@/layout/tools'
+import type { IBreadcrumb } from '@/utils/route.tsx'
 
 interface Props {
-    list: { title: string | undefined }[]
+    list: IBreadcrumb[]
 }
 
 export default function TopBar(props: Props) {
