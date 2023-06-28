@@ -4,8 +4,7 @@ import useSystemStore from '@/store/modules/system.ts'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { useEffect } from 'react'
 import classNames from 'classnames'
-import SvgIcon from '@/components/SvgIcon'
-import { theme } from 'antd'
+import { theme, Tag } from 'antd'
 
 interface Props {
     route: RouteItem
@@ -43,38 +42,55 @@ export default function Tags(props: Props) {
         navigate(path)
     }
 
+    const baseStyle = { borderColor: tColor.colorBorder, color: tColor.colorTextLabel }
+
     return (
         <div className={styles.container} style={{ borderColor: tColor.colorBorder }}>
             {systemStore.tagView.map((tag) => (
-                <span
+                <Tag
                     className={classNames([styles.tag, location.pathname === tag.path ? styles.active : ''])}
                     style={
                         location.pathname === tag.path
                             ? {
-                                  color: tColor.colorWhite,
-                                  backgroundColor: tColor.colorPrimary,
-                                  borderColor: tColor.colorPrimary
-                              }
-                            : {
-                                  color: tColor.colorTextBase,
+                                  ...baseStyle,
                                   backgroundColor: tColor.colorBgBase,
-                                  borderColor: tColor.colorBorder
+                                  borderBottom: `1px solid ${tColor.colorBgBase}`
                               }
+                            : baseStyle
                     }
                     key={tag.path}
                     onClick={() => handleGoToPage(tag.path)}
+                    closable={!tag.notDelTag}
+                    onClose={() => handleRemoveTag(tag.path)}
                 >
                     {tag.title}
-                    {!tag.notDelTag && (
-                        <SvgIcon
-                            name="ant-design:close-outlined"
-                            onClick={(ev) => {
-                                ev.stopPropagation()
-                                handleRemoveTag(tag.path)
-                            }}
-                        />
-                    )}
-                </span>
+                </Tag>
+                // <span
+                //     className={classNames([styles.tag, location.pathname === tag.path ? styles.active : ''])}
+                //     style={
+                //         location.pathname === tag.path
+                //             ? {
+                //                   borderColor: tColor.colorBorder
+                //               }
+                //             : {
+                //                   color: tColor.colorTextLabel,
+                //                   borderColor: tColor.colorBorder
+                //               }
+                //     }
+                //     key={tag.path}
+                //     onClick={() => handleGoToPage(tag.path)}
+                // >
+                //     {tag.title}
+                //     {!tag.notDelTag && (
+                //         <SvgIcon
+                //             name="ant-design:close-outlined"
+                //             onClick={(ev) => {
+                //                 ev.stopPropagation()
+                //                 handleRemoveTag(tag.path)
+                //             }}
+                //         />
+                //     )}
+                // </span>
             ))}
         </div>
     )

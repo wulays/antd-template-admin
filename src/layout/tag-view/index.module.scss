@@ -1,42 +1,25 @@
-@import "@/styles/variable";
-
 .container {
-    padding: 5px 14px;
     overflow: auto;
+    position: relative;
     white-space: nowrap;
-    border-bottom: 1px solid #d8dce5;
+    &:before{
+        left: 0;
+        right: 0;
+        bottom: 0;
+        content: '';
+        position: absolute;
+        border-bottom: 1px solid #d8dce5;
+    }
 
     .tag {
-        font-size: 12px;
-        padding: 5px 12px;
-        border-radius: 3px;
+        margin: 0;
+        border: none;
+        border-right: 1px solid;
+        padding: 7px 21px;
+        border-radius: 0;
         cursor: pointer;
-        color: #333;
-        margin-right: 5px;
-        display: inline-flex;
-        align-items: center;
-        border: 1px solid #d8dce5;
-        transition: background-color .1s, color .1s;
-        &.active{
-            color: #fff;
-            background: $colorPrimary;
-            :global(.iconify) {
-                &:hover{
-                    color: $colorPrimary;
-                    background: #fff;
-                }
-            }
-        }
-        :global(.iconify) {
-            transition: background-color .1s, color .1s;
-            box-sizing: content-box;
-            border-radius: 50%;
-            margin-left: 5px;
-            padding: 1px;
-            &:hover{
-                color: #fff;
-                background: $colorPrimary;
-            }
-        }
+        user-select: none;
+        position: relative;
+        transition: border 0s;
     }
 }
