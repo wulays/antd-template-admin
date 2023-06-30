@@ -1,6 +1,6 @@
 # 文档说明
 
-> 项目技术：react typescript sass zustand antd 等
+> 项目技术：react typescript sass zustand antd swr 等
 
 ## 环境
 

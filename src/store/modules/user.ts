@@ -6,6 +6,9 @@ import { devtools, persist, createJSONStorage } from 'zustand/middleware'
 import useSystemStore from '@/store/modules/system.ts'
 import { StateStorage } from '@/utils/auth.ts'
 import { getHelloTime } from '@/utils'
+import useRouteStore from '@/store/modules/route.ts'
+import { createAuthRoute } from '@/utils/route.tsx'
+import routes from '@/router'
 
 interface Store extends userLoginResType, userAuthResType {
     setName: (username: string) => void
@@ -33,6 +36,7 @@ const useUserStore = create<Store>()(
             (set) => {
                 const { errorMessage } = useMessage()
                 const systemStore = useSystemStore.getState()
+                const routeStore = useRouteStore.getState()
 
                 return {
                     ...initState(),
@@ -71,6 +75,8 @@ const useUserStore = create<Store>()(
                                 data: { auth }
                             } = await getAuth()
                             systemStore.changeLoadPage(false)
+
+                            routeStore.setRouteList(createAuthRoute(routes.routes, auth))
                             set(() => ({ auth }))
                             return auth
                         } catch (e) {

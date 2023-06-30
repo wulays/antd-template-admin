@@ -42,8 +42,6 @@ export default function Tags(props: Props) {
         navigate(path)
     }
 
-    const baseStyle = { borderColor: tColor.colorBorder, color: tColor.colorTextLabel }
-
     return (
         <div className={styles.container} style={{ borderColor: tColor.colorBorder }}>
             {systemStore.tagView.map((tag) => (
@@ -52,11 +50,12 @@ export default function Tags(props: Props) {
                     style={
                         location.pathname === tag.path
                             ? {
-                                  ...baseStyle,
+                                  color: tColor.colorTextLabel,
                                   backgroundColor: tColor.colorBgBase,
+                                  borderRightColor: tColor.colorBorder,
                                   borderBottom: `1px solid ${tColor.colorBgBase}`
                               }
-                            : baseStyle
+                            : { borderColor: tColor.colorBorder, color: tColor.colorTextLabel }
                     }
                     key={tag.path}
                     onClick={() => handleGoToPage(tag.path)}
@@ -65,32 +64,6 @@ export default function Tags(props: Props) {
                 >
                     {tag.title}
                 </Tag>
-                // <span
-                //     className={classNames([styles.tag, location.pathname === tag.path ? styles.active : ''])}
-                //     style={
-                //         location.pathname === tag.path
-                //             ? {
-                //                   borderColor: tColor.colorBorder
-                //               }
-                //             : {
-                //                   color: tColor.colorTextLabel,
-                //                   borderColor: tColor.colorBorder
-                //               }
-                //     }
-                //     key={tag.path}
-                //     onClick={() => handleGoToPage(tag.path)}
-                // >
-                //     {tag.title}
-                //     {!tag.notDelTag && (
-                //         <SvgIcon
-                //             name="ant-design:close-outlined"
-                //             onClick={(ev) => {
-                //                 ev.stopPropagation()
-                //                 handleRemoveTag(tag.path)
-                //             }}
-                //         />
-                //     )}
-                // </span>
             ))}
         </div>
     )

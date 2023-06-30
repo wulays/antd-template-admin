@@ -16,10 +16,12 @@ import { useAnimate } from 'framer-motion'
 import { useEffect } from 'react'
 import useUserStore from '@/store/modules/user.ts'
 import classNames from 'classnames'
-import { createBreadcrumb } from '@/utils/route.tsx'
+import { createBreadcrumb, filterMenuItem } from '@/utils/route.tsx'
+import useRouteStore from '@/store/modules/route.ts'
 
 export default function Layout() {
     const systemStore = useSystemStore()
+    const routeStore = useRouteStore()
     const userStore = useUserStore()
 
     const location = useLocation()
@@ -33,7 +35,7 @@ export default function Layout() {
     const route = routeList?.find((_) => _.pathname === location.pathname)?.route as RouteItem
 
     // 面包屑
-    const breadcrumbList = routeList.map((_) => createBreadcrumb(_))
+    const breadcrumbList = routeStore.routeList.map((_) => createBreadcrumb(_))
 
     const [scope, animate] = useAnimate()
 
@@ -48,8 +50,9 @@ export default function Layout() {
 
     useEffect(() => {
         if (route.children) {
+            const authRoute = filterMenuItem(route.children, userStore.auth)
             // 判断是否有子集有则显示第一个
-            navigate(route.children[0].path || userStore.homepath || '/')
+            navigate(authRoute[0].path || userStore.homepath || '/')
             return
         }
         animate('div', { opacity: [0, 1], filter: ['blur(1px)', 'blur(0px)'] })
@@ -71,7 +74,7 @@ export default function Layout() {
                             {!systemStore.hasHeader && systemStore.hasLogo && <Logo className={styles.logo} />}
                             <SideBar
                                 collapsMenu={systemStore.collapsMenu}
-                                authMenu={routes.routes}
+                                authMenu={routeStore.routeList}
                                 defaultOpenKeys={routeList.slice(0, -1).map((_) => _.pathname)}
                                 route={route}
                             />
@@ -88,7 +91,7 @@ export default function Layout() {
                             {systemStore.hasLogo && <Logo className={styles.logo} />}
                             <SideBar
                                 collapsMenu={false}
-                                authMenu={routes.routes}
+                                authMenu={routeStore.routeList}
                                 route={route}
                                 defaultOpenKeys={routeList.slice(0, -1).map((_) => _.pathname)}
                                 onClick={systemStore.toggleCollapsMenu}
