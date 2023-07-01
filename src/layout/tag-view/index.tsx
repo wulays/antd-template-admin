@@ -17,12 +17,17 @@ export default function Tags(props: Props) {
     const { token: tColor } = theme.useToken()
 
     useEffect(() => {
-        if (props.route.meta?.name) {
-            systemStore.setTagView({
-                path: location.pathname,
-                title: props.route.meta?.name,
-                notDelTag: props.route.meta.notDelTag
-            })
+        const timer = setTimeout(() => {
+            if (props.route.meta?.name) {
+                systemStore.setTagView({
+                    path: location.pathname,
+                    title: props.route.meta?.name,
+                    notDelTag: props.route.meta.notDelTag
+                })
+            }
+        }, 200)
+        return () => {
+            clearTimeout(timer)
         }
     }, [location.pathname])
 
