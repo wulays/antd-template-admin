@@ -3,4 +3,7 @@
 
 pnpm fix
 pnpm format
+pnpm build:docs
+rm -rf docs
+mv dist-test docs
 git add .

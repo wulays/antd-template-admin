@@ -3,8 +3,7 @@ import { RouteItem } from '@/router'
 import useSystemStore from '@/store/modules/system.ts'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { useEffect } from 'react'
-import classNames from 'classnames'
-import { theme, Tag } from 'antd'
+import { theme, Tabs } from 'antd'
 
 interface Props {
     route: RouteItem
@@ -28,7 +27,8 @@ export default function Tags(props: Props) {
     }, [location.pathname])
 
     // 处理移除标签
-    const handleRemoveTag = (path: string) => {
+    const handleRemoveTag = (path: React.MouseEvent | React.KeyboardEvent | string, action: 'add' | 'remove') => {
+        if (action === 'add' || typeof path !== 'string') return
         systemStore.removeTagView(path)
         if (systemStore.tagView.length <= 1) {
             navigate('/')
@@ -44,27 +44,21 @@ export default function Tags(props: Props) {
 
     return (
         <div className={styles.container} style={{ borderColor: tColor.colorBorder }}>
-            {systemStore.tagView.map((tag) => (
-                <Tag
-                    className={classNames([styles.tag, location.pathname === tag.path ? styles.active : ''])}
-                    style={
-                        location.pathname === tag.path
-                            ? {
-                                  color: tColor.colorTextLabel,
-                                  backgroundColor: tColor.colorBgBase,
-                                  borderRightColor: tColor.colorBorder,
-                                  borderBottom: `1px solid ${tColor.colorBgBase}`
-                              }
-                            : { borderColor: tColor.colorBorder, color: tColor.colorTextLabel }
+            <Tabs
+                type="editable-card"
+                className={styles.tag}
+                hideAdd
+                activeKey={location.pathname}
+                onChange={handleGoToPage}
+                onEdit={handleRemoveTag}
+                items={systemStore.tagView.map((tag) => {
+                    return {
+                        label: tag.title,
+                        key: tag.path,
+                        closable: !tag.notDelTag
                     }
-                    key={tag.path}
-                    onClick={() => handleGoToPage(tag.path)}
-                    closable={!tag.notDelTag}
-                    onClose={() => handleRemoveTag(tag.path)}
-                >
-                    {tag.title}
-                </Tag>
-            ))}
+                })}
+            />
         </div>
     )
 }
