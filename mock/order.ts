@@ -24,7 +24,6 @@ export default [
             let num = total - query.page * query.list
             num = num < 0 ? num + 10 : 10
 
-            console.log(query.page)
             const data = orderList(num).data
             return {
                 code: 200,
