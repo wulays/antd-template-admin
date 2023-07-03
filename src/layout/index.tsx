@@ -16,7 +16,7 @@ import { useAnimate } from 'framer-motion'
 import { useEffect } from 'react'
 import useUserStore from '@/store/modules/user.ts'
 import classNames from 'classnames'
-import { createBreadcrumb, filterMenuItem } from '@/utils/route.tsx'
+import { createBreadcrumb, filterNotAuthRoute } from '@/utils/route.tsx'
 import useRouteStore from '@/store/modules/route.ts'
 
 export default function Layout() {
@@ -35,7 +35,7 @@ export default function Layout() {
     const route = routeList?.find((_) => _.pathname === location.pathname)?.route as RouteItem
 
     // 面包屑
-    const breadcrumbList = routeStore.routeList.map((_) => createBreadcrumb(_))
+    const breadcrumbList = routeList.map(({ route }) => createBreadcrumb(route))
 
     const [scope, animate] = useAnimate()
 
@@ -50,7 +50,7 @@ export default function Layout() {
 
     useEffect(() => {
         if (route.children) {
-            const authRoute = filterMenuItem(route.children, userStore.auth)
+            const authRoute = filterNotAuthRoute(route.children, userStore.auth)
             // 判断是否有子集有则显示第一个
             navigate(authRoute[0].path || userStore.homepath || '/')
             return

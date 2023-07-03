@@ -29,16 +29,24 @@ export function createBreadcrumb(route: RouteItem, isRecursion = false): IBreadc
 }
 
 // 过滤隐藏项
-export function filterMenuItem(list: RouteItem[], auth: userAuthResType['auth']): RouteItem[] {
+export function filterHiddenMenuItem(list: RouteItem[]): RouteItem[] {
     return list.filter((_) => {
         // 如果不隐藏菜单栏同时有权限
-        return !_?.meta?.hidden && (!_.meta?.auth || auth.some((role) => _.meta?.auth?.includes(role)))
+        return !_.meta?.hidden
+    })
+}
+
+// 过滤无权限列表
+export function filterNotAuthRoute(list: RouteItem[], auth: userAuthResType['auth']): RouteItem[] {
+    return list.filter((_) => {
+        // 如果不隐藏菜单栏同时有权限
+        return !_.meta?.auth || auth.some((role) => _.meta?.auth?.includes(role))
     })
 }
 
 // 处理生成路由
 export function createAuthRoute(list: RouteItem[], auth: userAuthResType['auth']): RouteItem[] {
-    return filterMenuItem(list, auth).map((item) => {
+    return filterNotAuthRoute(list, auth).map((item) => {
         if (item.children) {
             return {
                 ...item,

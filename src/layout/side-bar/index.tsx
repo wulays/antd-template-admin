@@ -3,6 +3,7 @@ import type { MenuProps } from 'antd'
 import Icon from '@/components/SvgIcon'
 import { Link, useLocation } from 'react-router-dom'
 import type { RouteItem } from '@/router'
+import { filterHiddenMenuItem } from '@/utils/route.tsx'
 
 type MenuItem = Required<MenuProps>['items'][number]
 
@@ -24,7 +25,7 @@ export default function SideBar(props: Props) {
 
     // 路由生成菜单
     function createMenuItem(list: RouteItem[]): MenuItem[] {
-        return list.map((item) => {
+        return filterHiddenMenuItem(list).map((item) => {
             const filterChild = item.children
             // 如果只有一个子元素同时
             if (filterChild && filterChild.length === 1 && !item.meta?.alwaysShow) {
