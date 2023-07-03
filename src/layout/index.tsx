@@ -7,7 +7,7 @@ import useSystemStore from '@/store/modules/system.ts'
 import TopBar from '@/layout/top-bar'
 import Tags from '@/layout/tag-view'
 import { Drawer, theme } from 'antd'
-import { matchRoutes, Outlet, useLocation, useNavigate } from 'react-router-dom'
+import { matchRoutes, Outlet, RouteObject, useLocation, useNavigate } from 'react-router-dom'
 import routes from '@/router'
 import type { RouteItem } from '@/router'
 import Logo from './logo'
@@ -16,7 +16,7 @@ import { useAnimate } from 'framer-motion'
 import { useEffect } from 'react'
 import useUserStore from '@/store/modules/user.ts'
 import classNames from 'classnames'
-import { createBreadcrumb, filterNotAuthRoute } from '@/utils/route.tsx'
+import { createBreadcrumb } from '@/utils/route.tsx'
 import useRouteStore from '@/store/modules/route.ts'
 
 export default function Layout() {
@@ -28,8 +28,9 @@ export default function Layout() {
     const navigate = useNavigate()
     const { token: tColor } = theme.useToken()
 
+    const authRouteList = (routeStore.routeList.length > 0 ? routeStore.routeList : routes.routes) as RouteObject[]
     // 当前匹配的路由列表
-    const routeList = matchRoutes(routes.routes, location) || []
+    const routeList = matchRoutes(authRouteList, location) || []
 
     // 当前路由
     const route = routeList?.find((_) => _.pathname === location.pathname)?.route as RouteItem
@@ -50,7 +51,7 @@ export default function Layout() {
 
     useEffect(() => {
         if (route.children) {
-            const authRoute = filterNotAuthRoute(route.children, userStore.auth)
+            const authRoute = route.children
             // 判断是否有子集有则显示第一个
             navigate(authRoute[0].path || userStore.homepath || '/')
             return
