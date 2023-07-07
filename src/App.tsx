@@ -3,12 +3,12 @@ import './App.css'
 import router from '@/router'
 import { FC, useEffect } from 'react'
 import useSystemStore from '@/store/modules/system.ts'
-import { App as AntdApp, ConfigProvider } from 'antd'
+import { App as AntdApp, ConfigProvider, theme } from 'antd'
 import EscapeAntd from '@/components/EscapeAntd.tsx'
 import LoadPage from '@/components/LoadPage'
 
 const App: FC = () => {
-    const { setWidth, themeOption, gbLoadPage } = useSystemStore()
+    const { setWidth, themeOption, gbLoadPage, themeMode } = useSystemStore()
 
     useEffect(() => {
         setWidth(document.documentElement.clientWidth)
@@ -20,7 +20,8 @@ const App: FC = () => {
     return (
         <ConfigProvider
             theme={{
-                token: themeOption
+                token: themeOption,
+                algorithm: themeMode === 'light' ? theme.defaultAlgorithm : theme.darkAlgorithm
             }}
         >
             <AntdApp>

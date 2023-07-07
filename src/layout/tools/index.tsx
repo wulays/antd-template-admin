@@ -4,9 +4,11 @@ import type { MenuProps } from 'antd'
 import SvgIcon from '@/components/SvgIcon'
 import { Link, useNavigate } from 'react-router-dom'
 import useUserStore from '@/store/modules/user.ts'
+import useSystemStore from '@/store/modules/system.ts'
 
 export default function Tools() {
     const userStore = useUserStore()
+    const systemStore = useSystemStore()
     const navigate = useNavigate()
 
     const menuList: MenuProps['items'] = [
@@ -30,6 +32,13 @@ export default function Tools() {
 
     return (
         <div className={styles.user}>
+            <div className={styles.theme}>
+                <SvgIcon
+                    style={{ fill: systemStore.themeMode === 'dark' ? '#fff' : systemStore.themeOption?.colorPrimary }}
+                    name={`theme-${systemStore.themeMode}`}
+                    onClick={() => systemStore.changeThemeMode(systemStore.themeMode)}
+                />
+            </div>
             <Dropdown menu={{ items: menuList }} placement="bottom" arrow={{ pointAtCenter: true }}>
                 <div style={{ display: 'flex', alignItems: 'center' }}>
                     <Avatar size={28} icon={<SvgIcon name="ant-design:user-outlined" />} />

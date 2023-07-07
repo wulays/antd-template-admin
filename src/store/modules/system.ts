@@ -1,7 +1,10 @@
 import { create } from 'zustand'
 import { devtools } from 'zustand/middleware'
 import globalSettings from '@/settings.ts'
+import type { ISettings } from '@/settings.ts'
 import type { ThemeConfig } from 'antd'
+
+type themeMode = ISettings['app']['themeMode']
 
 interface TagViewType {
     path: string
@@ -10,6 +13,8 @@ interface TagViewType {
 }
 
 interface IStore {
+    themeMode: themeMode
+    changeThemeMode: (mode: themeMode) => void
     themeOption: ThemeConfig['token']
     width: number
     appTitle: string
@@ -32,6 +37,7 @@ interface IStore {
 const useSystemStore = create<IStore>()(
     devtools(
         (set) => ({
+            themeMode: globalSettings.app.themeMode,
             themeOption: {
                 colorPrimary: '#00a7e6'
             },
@@ -84,7 +90,17 @@ const useSystemStore = create<IStore>()(
                         return { gbLoadPage: status }
                     }
                     return { gbLoadPage: !state.gbLoadPage }
-                })
+                }),
+            changeThemeMode: (mode) => {
+                switch (mode) {
+                    case 'light':
+                        set(() => ({ themeMode: 'dark' }))
+                        break
+                    case 'dark':
+                        set(() => ({ themeMode: 'light' }))
+                        break
+                }
+            }
         }),
         {
             name: 'sysSeting'
