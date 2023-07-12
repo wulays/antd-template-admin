@@ -1,0 +1,1 @@
+import{F as s,L as t}from"./index-dc2efb5d.js";function r(){return s.jsxs("div",{children:["用户管理",s.jsx(t,{to:"/system/auth",children:"权限管理"}),s.jsx(t,{to:"/system/add-user/123",children:"新增用户"})]})}export{r as default};

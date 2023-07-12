@@ -9,6 +9,7 @@ export declare interface ISettings {
         hasHeader: boolean
         hasTagView: boolean
         hasLogo: boolean
+        hasBreadcrumb: boolean
         fixed: boolean
     }
 }
@@ -23,6 +24,7 @@ const globalSettings: ISettings = {
     header: {
         hasHeader: false,
         hasTagView: true,
+        hasBreadcrumb: false,
         hasLogo: true,
         fixed: false
     }

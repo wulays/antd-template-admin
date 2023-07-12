@@ -150,6 +150,17 @@ const routes: RouteItem[] = [
         ]
     },
     {
+        path: '/',
+        element: Layout,
+        children: [
+            {
+                path: '/tour',
+                element: lazyLoad(() => import('@/pages/tour')),
+                meta: { name: '入门指引', icon: 'ant-design:file-unknown-filled' }
+            }
+        ]
+    },
+    {
         path: 'https://github.com/wulays',
         meta: { name: '外链', icon: 'ant-design:select-outlined' }
     },

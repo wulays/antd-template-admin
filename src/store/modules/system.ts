@@ -27,6 +27,7 @@ interface IStore {
     changeLoadPage: (status?: boolean) => void
     tagView: TagViewType[]
     hasTagView: boolean
+    hasBreadcrumb: boolean
     setWidth: (width: number) => void
     collapsMenu: boolean
     toggleCollapsMenu: () => void
@@ -49,6 +50,7 @@ const useSystemStore = create<IStore>()(
             appTitle: globalSettings.app.appTitle,
             hasLogo: globalSettings.header.hasLogo,
             headerFixed: globalSettings.header.fixed,
+            hasBreadcrumb: globalSettings.header.hasBreadcrumb,
             hasHeader: globalSettings.header.hasHeader,
             hasTagView: globalSettings.header.hasTagView,
             enableDynamicTitle: globalSettings.app.enableDynamicTitle,
