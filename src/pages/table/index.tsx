@@ -1,6 +1,7 @@
 import styles from './index.module.scss'
-import { Button, Input, Select, Table, Tag } from 'antd'
+import { Button, Input, Select, Table, Tag, Checkbox } from 'antd'
 import { useEffect, useState } from 'react'
+import type { CheckboxValueType } from 'antd/es/checkbox/Group'
 
 interface IRow {
     key: number
@@ -75,6 +76,12 @@ export default function TablePage() {
         state: void 0
     })
 
+    const [checkedList, setCheckedList] = useState<CheckboxValueType[]>(columns.map((_) => _.dataIndex))
+
+    const onChange = (list: CheckboxValueType[]) => {
+        setCheckedList(list)
+    }
+
     const handleSearch = () => {
         setTableData(
             data.filter(
@@ -112,13 +119,21 @@ export default function TablePage() {
                     />
                 </li>
                 <li>
+                    <Checkbox.Group options={columns.map((_) => _.dataIndex)} value={checkedList} onChange={onChange} />
+                </li>
+                <li>
                     <Button type="primary" onClick={handleSearch}>
                         查询
                     </Button>
                 </li>
             </ul>
 
-            <Table size="small" bordered dataSource={tableData} columns={columns} />
+            <Table
+                size="small"
+                bordered
+                dataSource={tableData}
+                columns={columns.filter((_) => checkedList.includes(_.dataIndex))}
+            />
         </div>
     )
 }

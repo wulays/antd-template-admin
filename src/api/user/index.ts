@@ -1,7 +1,7 @@
 import request from '@/utils/request.ts'
 
 export function login(data: userLoginReqType) {
-    return request<any, { data: userLoginResType }>({
+    return request<userLoginResType>({
         url: '/api/user/login',
         method: 'post',
         data
@@ -9,7 +9,7 @@ export function login(data: userLoginReqType) {
 }
 
 export function getAuth(params?: userAuthReqType) {
-    return request<any, { data: userAuthResType }>({
+    return request<userAuthResType>({
         url: '/api/user/auth',
         method: 'get',
         params
