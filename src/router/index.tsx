@@ -143,20 +143,26 @@ const routes: RouteItem[] = [
         element: Layout,
         children: [
             {
-                path: '/markdown',
-                element: lazyLoad(() => import('@/pages/markdown')),
-                meta: { name: 'Markdown', icon: 'ant-design:read-filled' }
+                path: '/tour',
+                element: lazyLoad(() => import('@/pages/tour')),
+                meta: { name: '入门指引', icon: 'ant-design:file-unknown-filled' }
             }
         ]
     },
     {
         path: '/',
         element: Layout,
+        meta: { name: '错误页面', icon: 'ant-design:meh-filled', auth: ['menu'] },
         children: [
             {
-                path: '/tour',
-                element: lazyLoad(() => import('@/pages/tour')),
-                meta: { name: '入门指引', icon: 'ant-design:file-unknown-filled' }
+                path: '/401',
+                element: Page401,
+                meta: { name: '401' }
+            },
+            {
+                path: '/404',
+                element: Page404,
+                meta: { name: '404' }
             }
         ]
     },
