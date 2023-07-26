@@ -1,6 +1,12 @@
 import axios from 'axios'
+import type { AxiosRequestConfig } from 'axios'
 import { message } from '@/components/EscapeAntd'
 import useUserStore from '@/store/modules/user.ts'
+
+interface IResponse {
+    code: string
+    msg: string
+}
 
 const request = axios.create({
     baseURL: import.meta.env.VITE_BASE_URL,
@@ -36,4 +42,6 @@ request.interceptors.response.use(
     }
 )
 
-export default request
+export default function <T>(params: AxiosRequestConfig): Promise<T & IResponse> {
+    return request(params)
+}
